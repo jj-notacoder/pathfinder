@@ -45,6 +45,18 @@ export default function DiscoverPage() {
     }
   }, [hasCompletedMatrix, contextCareers, result]);
 
+  // FIX: Hard reset local state if user clicks "Retake Matrix" (context becomes false)
+  useEffect(() => {
+    if (!hasCompletedMatrix && result) {
+      setStarted(false);
+      setCurrentQ(0);
+      setTraits([]);
+      setMessages([]);
+      setResult(null);
+      setExpandText("");
+    }
+  }, [hasCompletedMatrix, result]);
+
   // FIX: Scroll to top when results are set
   useEffect(() => {
     if (result) {

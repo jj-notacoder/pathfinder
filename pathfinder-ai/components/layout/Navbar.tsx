@@ -8,7 +8,6 @@ import { NAV_LINKS } from '@/lib/constants';
 import { Button, cn } from '@/components/ui/Button';
 import { MobileMenu } from './MobileMenu';
 import { useCareerContext } from '@/context/CareerContext';
-import { Lock } from 'lucide-react';
 
 export function Navbar() {
   const [scrollY, setScrollY] = React.useState(0);
@@ -16,7 +15,7 @@ export function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   
-  const { hasCompletedMatrix } = useCareerContext();
+  const { hasCompletedMatrix, setHasCompletedMatrix } = useCareerContext();
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -28,12 +27,9 @@ export function Navbar() {
 
   const isScrolled = scrollY > 80;
 
-  const handleRestrictedNav = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    const isRestricted = href === '/vault' || href === '/mentors';
-    if (isRestricted && !hasCompletedMatrix) {
-      e.preventDefault();
-      alert("You must complete the Reality Matrix on the Discover page before accessing this section.");
-      router.push('/discover');
+  const handleMatrixNav = (href: string) => {
+    if (href === '/discover' || href === '/') {
+      setHasCompletedMatrix(false);
     }
   };
 
@@ -54,28 +50,24 @@ export function Navbar() {
           <div className="hidden md:flex items-center gap-8">
             {NAV_LINKS.map(link => {
               const isActive = pathname === link.href || (pathname.startsWith(link.href) && link.href !== '/');
-              const isRestricted = (link.href === '/vault' || link.href === '/mentors') && !hasCompletedMatrix;
-
               return (
                 <Link 
                   key={link.href} 
                   href={link.href}
-                  onClick={(e) => handleRestrictedNav(e, link.href)}
+                  onClick={() => link.href === '/discover' && setHasCompletedMatrix(false)}
                   className={cn(
                     "flex items-center gap-1.5 relative font-body font-medium text-sm transition-colors duration-300",
                     "after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-full after:h-[1px] after:bg-white after:origin-left after:scale-x-0",
-                    !isRestricted && "hover:after:scale-x-100 after:transition-transform after:duration-300",
-                    isActive ? "text-white after:scale-x-100" : "text-muted hover:text-white",
-                    isRestricted ? "opacity-60 cursor-not-allowed hover:text-amber" : ""
+                    "hover:after:scale-x-100 after:transition-transform after:duration-300",
+                    isActive ? "text-white after:scale-x-100" : "text-muted hover:text-white"
                   )}
                 >
-                  {isRestricted && <Lock size={12} className="text-amber mb-0.5" />}
                   {link.label}
                 </Link>
               );
             })}
-            <Button href="/discover" variant="amber" size="md" className="ml-4">
-              {hasCompletedMatrix ? "View Matrix" : "Begin Discovery"}
+            <Button href="/discover" variant="amber" size="md" className="ml-4" onClick={() => setHasCompletedMatrix(false)}>
+              {hasCompletedMatrix ? "Retake Matrix" : "Begin Discovery"}
             </Button>
           </div>
 

@@ -14,14 +14,6 @@ export default function VaultPage() {
   const { hasCompletedMatrix } = useCareerContext();
   const [activeFilter, setActiveFilter] = useState('All');
 
-  useEffect(() => {
-    if (!hasCompletedMatrix) {
-      router.replace('/discover');
-    }
-  }, [hasCompletedMatrix, router]);
-
-  if (!hasCompletedMatrix) return null;
-
   const filters = ['All', 'Technology', 'Engineering', 'Medicine', 'Law', 'Design', 'Finance'];
 
   const filteredData = activeFilter === 'All' 

@@ -15,14 +15,6 @@ export default function MentorsPage() {
   const [activeTab, setActiveTab] = useState<'nearPeers' | 'professionals'>('nearPeers');
   const [activeFilter, setActiveFilter] = useState('All');
 
-  useEffect(() => {
-    if (!hasCompletedMatrix) {
-      router.replace('/discover');
-    }
-  }, [hasCompletedMatrix, router]);
-
-  if (!hasCompletedMatrix) return null;
-
   const filters = ['All', 'Technology', 'Engineering', 'Medicine', 'Law', 'Design', 'Finance'];
 
   const baseData = MENTORS[activeTab];

@@ -24,7 +24,7 @@ export default function Home() {
       <motion.div className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-teal via-amber to-teal origin-left z-[100]" style={{ scaleX }} />
 
       {/* 1. HERO SECTION */}
-      <section className="relative h-screen flex items-center justify-center pt-20 overflow-hidden">
+      <section className="relative min-h-[100dvh] flex items-center justify-center pt-32 pb-24 overflow-hidden">
         <ConstellationCanvas dotCount={150} speed={0.9} interactive={true} />
         {/* Cinematic Gradient Overlays */}
         <div className="absolute inset-0 z-[1] bg-[radial-gradient(circle_at_50%_0%,_rgba(0,212,168,0.15)_0%,_transparent_50%)]"></div>
@@ -34,14 +34,6 @@ export default function Home() {
           style={{ opacity: heroOpacity, y: heroY }}
           className="max-w-7xl mx-auto px-6 w-full relative z-10 text-center flex flex-col items-center"
         >
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-teal/10 border border-teal/20 text-teal text-xs font-bold tracking-widest uppercase mb-10 shadow-[0_0_20px_rgba(0,212,168,0.2)] backdrop-blur-md"
-          >
-            <span className="w-2 h-2 rounded-full bg-teal animate-pulse"></span>
-            The Anti-Algorithm API
-          </motion.div>
-          
           <motion.h1 
             initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4 }}
             className="font-display font-black text-6xl md:text-8xl leading-[1.05] mb-8 tracking-tight"
@@ -174,14 +166,6 @@ export default function Home() {
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 relative">
-            {/* Lock Overlay indicating protection */}
-            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-bg via-bg/80 to-transparent z-10 pointer-events-none flex items-end justify-center pb-12">
-               <div className="bg-bg3/80 backdrop-blur-md border border-border px-8 py-4 rounded-full flex items-center gap-3 shadow-2xl">
-                 <Shield size={20} className="text-amber" />
-                 <span className="font-body font-bold text-sm tracking-widest uppercase">Vault Locked. Matrix Required.</span>
-               </div>
-            </div>
-
             {VAULT_PROFESSIONALS.slice(0, 4).map((prof, i) => (
               <motion.div
                 key={prof.id}
@@ -189,8 +173,6 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="opacity-50 blur-[2px] pointer-events-none"
-                style={{ filter: i > 1 ? 'blur(4px)' : 'blur(2px)' }}
               >
                 <VoiceNotePlayer prof={prof} />
               </motion.div>
