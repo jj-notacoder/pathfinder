@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #060608;
+  --color-bg2: #0D0D14;
+  --color-bg3: #12121C;
+  --color-card: #111118;
+  --color-card-hover: #18181F;
+  --color-amber: #F0A500;
+  --color-amber-dim: #C07800;
+  --color-teal: #00D4A8;
+  --color-teal-dim: #008F72;
+  --color-white: #F4F2ED;
+  --color-muted: #7A7A8A;
+  --color-border: rgba(255,255,255,0.07);
+
+  --font-display: var(--font-syne), sans-serif;
+  --font-body: var(--font-space), sans-serif;
+}
+
+:root {
+  --radius: 16px;
+  --radius-sm: 10px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--color-bg);
+  color: var(--color-white);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-amber);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::selection {
+  background: rgba(240,165,0,0.2);
+  color: var(--color-white);
+}
+
+@layer utilities {
+  .clip-path-slant {
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+  }
+}

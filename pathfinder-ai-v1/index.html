@@ -1,0 +1,1636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pathfinder AI - Reality-first career discovery</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+/* CSS_PLACEHOLDER: BASE_STYLES */
+:root {
+  --bg: #060608;
+  --bg2: #0D0D14;
+  --bg3: #12121C;
+  --card: #111118;
+  --card-hover: #18181F;
+  --amber: #F0A500;
+  --amber-dim: #C07800;
+  --teal: #00D4A8;
+  --teal-dim: #008F72;
+  --white: #F4F2ED;
+  --muted: #7A7A8A;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-hover: rgba(255, 255, 255, 0.15);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+    margin: 0; padding: 0;
+    background-color: var(--bg); color: var(--white);
+    font-family: var(--font-body); font-weight: 400;
+    overflow-x: hidden; -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6, p { margin: 0; }
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; cursor: pointer; border: none; background: transparent; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+
+/* Global Typography */
+.font-display { font-family: var(--font-display); }
+.font-body { font-family: var(--font-body); }
+.text-amber { color: var(--amber); }
+.text-teal { color: var(--teal); }
+.text-muted { color: var(--muted); }
+.text-white { color: var(--white); }
+
+/* Transitions & Scrollbar */
+.transition-all { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--amber); border-radius: 2px; }
+::selection { background: rgba(240, 165, 0, 0.3); color: var(--bg); }
+
+/* Reusable Components */
+.section-label {
+    font-family: var(--font-body); font-weight: 500; font-size: 12px;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal);
+    margin-bottom: 24px; display: block;
+}
+.pill-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 100px; padding: 12px 24px; font-weight: 600; font-size: 14px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.pill-amber { background: var(--amber); color: #060608; }
+.pill-amber:hover { transform: scale(1.03); box-shadow: 0 0 20px rgba(240, 165, 0, 0.3); }
+.pill-teal-outline { border: 1px solid var(--border); color: var(--white); background: transparent; }
+.pill-teal-outline:hover { transform: scale(1.03); border-color: var(--border-hover); box-shadow: 0 0 20px rgba(0, 212, 168, 0.15); }
+
+/* Section Backgrounds */
+.bg-even { background-color: var(--bg); }
+.bg-odd { background-color: var(--bg2); }
+
+/* CSS_PLACEHOLDER: NAV_STYLES */
+.main-nav {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+    height: 72px; padding: 0 5%;
+    display: flex; justify-content: space-between; align-items: center;
+    background: transparent; border-bottom: 1px solid transparent;
+    transition: background 0.4s, backdrop-filter 0.4s, border-bottom 0.4s;
+    transform: translateY(-100%); opacity: 0;
+}
+.main-nav.scrolled {
+    background: rgba(6, 6, 8, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+}
+.nav-logo { font-family: var(--font-display); font-weight: 800; font-size: 20px; letter-spacing: 0.05em; display: flex; align-items: flex-start; }
+.nav-logo-sup { font-family: var(--font-body); font-weight: 600; font-size: 11px; color: var(--amber); margin-left: 2px; line-height: 1; vertical-align: super; }
+.nav-links { display: flex; gap: 32px; }
+.nav-link { font-family: var(--font-body); font-weight: 500; font-size: 14px; color: var(--muted); position: relative; padding: 4px 0; }
+.nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background: var(--white); transform: scaleX(0); transform-origin: left; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.nav-link:hover { color: var(--white); }
+.nav-link:hover::after { transform: scaleX(1); }
+.nav-btn { font-family: var(--font-body); font-weight: 600; font-size: 14px; padding: 12px 24px; border-radius: 100px; }
+
+.hamburger { display: none; width: 24px; height: 20px; position: relative; cursor: pointer; z-index: 1001; }
+.hamburger-line { position: absolute; width: 100%; height: 3px; background: var(--white); border-radius: 2px; transition: all 0.3s ease; }
+.hamburger-line:nth-child(1) { top: 0; }
+.hamburger-line:nth-child(2) { top: 8px; }
+.hamburger-line:nth-child(3) { top: 16px; }
+.hamburger.open .hamburger-line:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger.open .hamburger-line:nth-child(2) { opacity: 0; }
+.hamburger.open .hamburger-line:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+.mobile-menu {
+    position: fixed; inset: 0; background: var(--bg2); z-index: 999;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 40px;
+    opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+}
+.mobile-menu.open { opacity: 1; pointer-events: auto; }
+.mobile-link { font-family: var(--font-display); font-weight: 700; font-size: 32px; color: var(--white); transform: translateX(20px); opacity: 0; transition: all 0.4s ease; }
+.mobile-menu.open .mobile-link { transform: translateX(0); opacity: 1; }
+
+@media(max-width: 900px) {
+    .nav-links, .nav-btn-wrapper { display: none; }
+    .hamburger { display: block; }
+    .main-nav { height: 60px; }
+}
+
+/* CSS_PLACEHOLDER: HERO_STYLES */
+.hero-sec {
+    position: relative; height: 100dvh; min-height: 600px;
+    display: flex; align-items: center; padding: 0 5%; overflow: hidden;
+}
+.hero-glow-1 { position: absolute; left: 65%; top: 50%; width: 1200px; height: 1200px; background: radial-gradient(circle, rgba(0,212,168,0.05) 0%, transparent 60%); transform: translate(-50%, -50%); pointer-events: none; z-index: 0; }
+.hero-glow-2 { position: absolute; left: 30%; top: 70%; width: 800px; height: 800px; background: radial-gradient(circle, rgba(240,165,0,0.04) 0%, transparent 60%); transform: translate(-50%, -50%); pointer-events: none; z-index: 0; }
+.hero-noise { position: absolute; inset: 0; opacity: 0.025; pointer-events: none; z-index: 1; background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>'); }
+
+.hero-content { width: 55%; position: relative; z-index: 10; display: flex; flex-direction: column; align-items: flex-start; }
+.eyebrow {
+    border: 1px solid var(--teal); border-radius: 100px; padding: 6px 14px;
+    font-size: 12px; font-weight: 500; color: var(--teal); margin-bottom: 32px; opacity: 0; transform: translateY(20px);
+}
+.hero-h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(48px, 8vw, 96px); line-height: 1; margin-bottom: 24px; }
+.hero-h1 .split-word { display: inline-block; opacity: 0; transform: translateY(40px); }
+.hero-h1 .italic-word { font-style: italic; position: relative; white-space: nowrap; display: inline-block; opacity: 0; transform: translateY(40px); padding-bottom: 5px; }
+.hero-underline { position: absolute; left: 0; bottom: 0; width: 100%; height: 12px; pointer-events: none; overflow: visible; }
+.hero-underline path { stroke-dasharray: 400; stroke-dashoffset: 400; }
+.hero-sub { font-size: clamp(16px, 2vw, 20px); color: var(--muted); line-height: 1.6; max-width: 480px; margin-bottom: 40px; opacity: 0; transform: translateY(20px); }
+
+.hero-ctas { display: flex; gap: 16px; margin-bottom: 40px; }
+.hero-ctas button { opacity: 0; transform: translateY(20px); }
+.trust-bar { display: inline-flex; align-items: center; gap: 12px; font-size: 12px; color: var(--muted); flex-wrap: wrap; opacity: 0; }
+.trust-sep { width: 1px; height: 12px; background: var(--border); }
+
+.hero-canvas-wrapper { position: absolute; right: 0; top: 0; width: 45%; height: 100%; z-index: 5; opacity: 0; }
+canvas#heroCanvas { display: block; width: 100%; height: 100%; outline: none; }
+
+.scroll-ind { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 11px; color: var(--muted); z-index: 10; opacity: 0; }
+.scroll-line { width: 1px; height: 40px; background: var(--amber); animation: pulseScroll 1.5s infinite alternate; }
+@keyframes pulseScroll { 0% { opacity: 0.2; transform: scaleY(0.7); } 100% { opacity: 1; transform: scaleY(1); } }
+
+@media(max-width: 900px) {
+    .hero-content { width: 100%; align-items: center; text-align: center; }
+    .hero-canvas-wrapper { position: relative; width: 100%; height: 300px; margin-top: 40px; }
+    .hero-sec { flex-direction: column; justify-content: center; }
+    .hero-h1 { line-height: 1.1; }
+    .hero-h1 .split-word { margin-bottom: 4px; }
+}
+/* CSS_PLACEHOLDER: PROBLEM_STYLES */
+.problem-sec { background: var(--bg2); padding: 120px 5%; text-align: center; }
+.sec-headline { font-family: var(--font-display); font-weight: 700; font-size: clamp(36px, 5vw, 60px); color: var(--white); max-width: 700px; margin: 0 auto 64px; line-height: 1.1; }
+.sec-headline-sub { font-size: clamp(36px, 5vw, 56px); margin: 0 auto 80px; }
+.problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto; text-align: left; }
+
+.tilt-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 36px 28px; position: relative; transform-style: preserve-3d;
+    opacity: 0; transform: translateY(40px); /* For entrance */
+}
+.tilt-card::before {
+    content: ''; position: absolute; left: -1px; top: 0; height: 100%; width: 3px;
+    background: linear-gradient(to bottom, var(--amber), transparent);
+    border-radius: var(--radius) 0 0 var(--radius);
+}
+.tilt-teal-edge::before { background: linear-gradient(to bottom, var(--teal), transparent); }
+.card-shine { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 1; transition: background 0.1s; }
+
+.card-num { font-family: var(--font-display); font-weight: 800; font-size: 64px; color: var(--amber); opacity: 0.15; line-height: 1; margin-bottom: 24px; }
+.card-num-teal { color: var(--teal); }
+.card-title { font-family: var(--font-display); font-weight: 700; font-size: 22px; color: var(--white); margin-bottom: 16px; line-height: 1.3; }
+.card-body { font-size: 15px; color: var(--muted); line-height: 1.6; }
+
+/* CSS_PLACEHOLDER: PATHWAY_STYLES */
+.pathway-sec { background: var(--bg); padding: 120px 5%; text-align: center; }
+.timeline-wrapper { position: relative; max-width: 1100px; margin: 0 auto; }
+.timeline-svg { position: absolute; top: 24px; left: 10%; width: 80%; height: 2px; z-index: 0; overflow: visible; }
+.timeline-path { stroke: var(--amber); stroke-width: 1px; stroke-dasharray: 8 4; stroke-dashoffset: 1000; fill: none; }
+.timeline-svg-mobile { display: none; position: absolute; top: 0; left: 24px; width: 2px; height: 100%; z-index: 0; overflow: visible; }
+
+.pathway-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; position: relative; z-index: 2; }
+.pathway-col { display: flex; flex-direction: column; align-items: center; }
+.path-node {
+    width: 48px; height: 48px; border: 2px solid var(--amber); border-radius: 50%;
+    background: var(--bg3); display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-weight: 800; font-size: 18px; color: var(--amber);
+    margin-bottom: 32px;
+}
+.pathway-col .tilt-card { width: 100%; text-align: left; }
+.pathway-col .tilt-card::before { display: none; }
+
+.step-icon { width: 40px; height: 40px; margin-bottom: 24px; }
+.step-tag { display: inline-block; padding: 4px 12px; border-radius: 100px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; font-family: var(--font-body); }
+.tag-teal { background: rgba(0, 212, 168, 0.1); color: var(--teal); border: 1px solid var(--teal); }
+.tag-amber { background: rgba(240, 165, 0, 0.1); color: var(--amber); border: 1px solid var(--amber); }
+.tag-white { background: rgba(255, 255, 255, 0.05); color: var(--white); border: 1px solid var(--border); }
+.step-title { font-family: var(--font-display); font-weight: 700; font-size: 24px; color: var(--white); margin-bottom: 12px; }
+
+@media(max-width: 900px) {
+    .problem-grid, .pathway-grid { grid-template-columns: 1fr; }
+    .timeline-svg { display: none; }
+    .timeline-svg-mobile { display: block; }
+    .pathway-col { flex-direction: row; align-items: flex-start; gap: 20px; }
+    .path-node { flex-shrink: 0; margin-bottom: 0; z-index: 2; position: relative; left: 0px; top: 0px; }
+}
+/* CSS_PLACEHOLDER: CHAT_STYLES */
+.chat-sec { background: var(--bg2); padding: 100px 5%; }
+.chat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; max-width: 1200px; margin: 0 auto; align-items: stretch; }
+.chat-info { display: flex; flex-direction: column; justify-content: center; }
+.chat-h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(32px, 4vw, 48px); color: var(--white); margin-bottom: 24px; line-height: 1.1; }
+.chat-sub { font-size: 17px; color: var(--muted); margin-bottom: 40px; line-height: 1.6; }
+.chat-features { display: flex; flex-direction: column; gap: 20px; }
+.chat-feat-row { display: flex; gap: 16px; align-items: center; font-size: 15px; font-weight: 500; color: var(--white); }
+.feat-icon { width: 16px; height: 16px; fill: var(--amber); flex-shrink: 0; }
+
+.chat-widget {
+    background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+    overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,0.4); display: flex; flex-direction: column;
+}
+.cw-header {
+    background: var(--bg3); height: 56px; padding: 0 20px;
+    display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border);
+}
+.cw-user { display: flex; align-items: center; gap: 12px; }
+.cw-avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--amber); color: var(--bg); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; font-size: 11px; }
+.cw-name { font-weight: 600; font-size: 14px; color: var(--white); line-height: 1.2; }
+.cw-status { font-size: 11px; color: var(--teal); display: flex; align-items: center; gap: 4px; }
+.cw-dot { width: 6px; height: 6px; background: var(--teal); border-radius: 50%; display: inline-block; }
+.cw-progress-wrap { display: flex; align-items: center; gap: 12px; }
+.cw-prog-text { font-size: 12px; color: var(--muted); }
+.cw-prog-bar { width: 100px; height: 5px; background: var(--border); border-radius: 100px; overflow: hidden; }
+.cw-prog-fill { height: 100%; width: 0%; background: var(--amber); transition: width 0.4s ease; }
+
+.cw-body { height: 380px; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 16px; scroll-behavior: smooth; }
+.msg-row { display: flex; width: 100%; opacity: 0; transform: translateY(10px); animation: msgIn 0.3s forwards ease-out; }
+@keyframes msgIn { to { opacity: 1; transform: translateY(0); } }
+.msg-bot { justify-content: flex-start; }
+.msg-bot .msg-bubble { background: var(--bg3); border: 1px solid var(--border); border-radius: 4px 18px 18px 18px; color: var(--white); }
+.msg-bot .msg-content { display: flex; gap: 12px; max-width: 85%; }
+.msg-user { justify-content: flex-end; }
+.msg-user .msg-bubble { background: var(--amber); color: var(--bg); border-radius: 18px 4px 18px 18px; max-width: 75%; }
+.msg-bubble { padding: 14px 18px; font-size: 14px; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word; }
+
+.typing-dots { display: flex; gap: 4px; padding: 4px; }
+.t-dot { width: 6px; height: 6px; background: var(--muted); border-radius: 50%; animation: tDot 1.4s infinite; }
+.t-dot:nth-child(2) { animation-delay: 0.15s; }
+.t-dot:nth-child(3) { animation-delay: 0.3s; }
+@keyframes tDot { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.4); } }
+
+.cw-input-area { background: var(--bg3); border-top: 1px solid var(--border); padding: 12px 16px; display: flex; align-items: center; gap: 8px; }
+.cw-input { flex: 1; background: transparent; border: none; font-family: var(--font-body); color: var(--white); font-size: 15px; outline: none; }
+.cw-input::placeholder { color: var(--muted); }
+.cw-send { width: 40px; height: 40px; border-radius: 50%; background: var(--amber); color: var(--bg); display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: transform 0.2s; }
+.cw-send:hover:not(:disabled) { transform: scale(1.08); }
+.cw-send:disabled { opacity: 0.5; cursor: not-allowed; }
+.cw-send svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+
+.unlock-msg { padding: 16px; border: 1px solid var(--teal); border-radius: var(--radius-sm); color: var(--teal); font-weight: 500; font-size: 14px; text-align: center; display: none; background: rgba(0,212,168,0.05); margin: 16px; }
+.career-cards-wrap { display: none; margin-top: 40px; }
+.career-cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.c-card { background: var(--card); border: 1px solid var(--border); padding: 24px; border-radius: var(--radius); text-align: center; cursor: pointer; transition: all 0.3s; display: flex; flex-direction: column; align-items: center; }
+.c-card:hover { border-color: var(--amber); box-shadow: 0 0 20px rgba(240,165,0,0.15); transform: translateY(-4px); }
+.c-card-title { font-family: var(--font-display); font-weight: 700; font-size: 24px; color: var(--white); margin-bottom: 8px; }
+.c-card-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+.c-card-btn { color: var(--teal); font-weight: 600; font-size: 14px; }
+
+@media(max-width: 900px) {
+    .chat-grid { grid-template-columns: 1fr; }
+    .career-cards-grid { grid-template-columns: 1fr; }
+}
+/* CSS_PLACEHOLDER: VAULT_STYLES */
+.vault-sec { background: var(--bg); padding: 120px 5%; }
+.vault-sec .sec-headline { margin-bottom: 32px; text-align: center; }
+.vault-tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 64px; flex-wrap: wrap; }
+.v-tab { padding: 8px 20px; border-radius: 100px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+.v-tab:hover { border-color: var(--border-hover); color: var(--white); }
+.v-tab.active { background: var(--amber); color: var(--bg); border-color: var(--amber); }
+
+.vault-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
+.vc-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; position: relative; transition: all 0.4s ease; transform-style: preserve-3d; opacity: 0; transform: translateY(40px); }
+.vc-card:hover { transform: translateY(-8px) rotateX(0) rotateY(0) !important; border-color: var(--border-hover); box-shadow: 0 24px 48px rgba(0,0,0,0.4); }
+
+.vc-wave { display: flex; gap: 5px; height: 40px; align-items: flex-end; margin-bottom: 24px; }
+.vc-bar { width: 3px; border-radius: 2px; background: var(--teal); transform-origin: bottom center; }
+.vc-card:hover .vc-bar.animated { animation: vcWave var(--anim-dur) infinite alternate ease-in-out; }
+@keyframes vcWave { 0% { transform: scaleY(0.3); } 100% { transform: scaleY(1); } }
+
+.vc-prof { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.vc-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--bg3); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; font-size: 16px; color: var(--amber); flex-shrink: 0; }
+.vc-name { font-size: 15px; font-weight: 600; color: var(--white); margin-bottom: 2px; }
+.vc-role { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.vc-exp { padding: 2px 8px; border: 1px solid var(--amber); border-radius: 100px; color: var(--amber); font-size: 11px; font-weight: 500; display: inline-block; }
+
+.vc-q { position: relative; font-size: 14px; font-style: italic; color: var(--muted); line-height: 1.5; margin-bottom: 24px; min-height: 42px; }
+.vc-q::before { content: '"'; position: absolute; left: -10px; top: -20px; font-family: 'Syne'; font-size: 64px; color: var(--teal); opacity: 0.15; line-height: 1; pointer-events: none; }
+
+.vc-bottom { display: flex; justify-content: space-between; align-items: center; }
+.vc-tag { font-size: 11px; color: var(--teal); border: 1px solid var(--teal); padding: 4px 12px; border-radius: 100px; text-transform: uppercase; }
+.vc-play { font-size: 13px; font-weight: 500; color: var(--amber); display: flex; align-items: center; gap: 6px; }
+
+.vc-locked { position: absolute; inset: 0; background: rgba(6,6,8,0.75); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); z-index: 10; border-radius: inherit; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; }
+.lock-icon { width: 24px; height: 24px; stroke: var(--muted); margin-bottom: 12px; }
+.lock-text { font-size: 13px; color: var(--muted); max-width: 80%; }
+.vc-card.locked .vc-bar { background: var(--muted); }
+
+/* Audio Modal */
+.audio-modal-wrap { position: fixed; inset: 0; background: rgba(6,6,8,0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 9999; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; padding: 20px; }
+.audio-modal-wrap.open { opacity: 1; pointer-events: auto; }
+.audio-modal { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 40px; max-width: 600px; width: 100%; transform: scale(0.9); transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1); max-height: 90vh; display: flex; flex-direction: column; position: relative; }
+.audio-modal-wrap.open .audio-modal { transform: scale(1); }
+.am-close { position: absolute; top: 24px; right: 24px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0.5; transition: opacity 0.2s; }
+.am-close:hover { opacity: 1; }
+.am-close svg { width: 24px; height: 24px; stroke: var(--white); stroke-width: 2; }
+
+.am-title { font-family: var(--font-display); font-weight: 700; font-size: 22px; color: var(--white); margin: 24px 0 32px; }
+.am-player { background: var(--bg3); border-radius: 16px; padding: 24px; margin-bottom: 24px; }
+.am-controls { display: flex; align-items: center; gap: 24px; margin-bottom: 16px; }
+.am-play-btn { width: 56px; height: 56px; border-radius: 50%; background: var(--amber); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.am-play-btn svg { width: 24px; height: 24px; fill: var(--bg); margin-left: 4px; }
+.am-play-btn.playing svg { margin-left: 0; }
+.am-wave { flex: 1; display: flex; gap: 3px; height: 40px; align-items: center; overflow: hidden; }
+.am-bar { width: 4px; height: 10px; background: var(--teal); border-radius: 2px; }
+.am-bar.animated { animation: vcWave var(--anim-dur) infinite alternate ease-in-out; }
+.am-prog-wrap { display: flex; align-items: center; gap: 16px; }
+.am-progress { flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.am-fill { height: 100%; width: 0%; background: var(--amber); transition: width 0.1s linear; }
+.am-time { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+.am-text { font-size: 15px; color: var(--muted); line-height: 1.8; overflow-y: auto; padding-right: 16px; flex: 1; white-space: pre-wrap; }
+
+@media(max-width: 1100px) { .vault-grid { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width: 768px) { .vault-grid { grid-template-columns: 1fr; } .chat-h2 { font-size: 32px; } .am-player { padding: 16px; } .am-controls { gap: 16px; } .audio-modal { padding: 24px; } }
+/* CSS_PLACEHOLDER: TIERS_STYLES */
+.tiers-sec { background: var(--bg2); padding: 120px 5%; text-align: center; }
+.tiers-sec .sec-headline { margin-bottom: 24px; }
+.tiers-sub { font-size: 18px; color: var(--muted); margin-bottom: 64px; }
+
+.tiers-wrap { display: flex; align-items: stretch; justify-content: center; max-width: 1000px; margin: 0 auto 64px; position: relative; }
+.tier-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 48px 40px; text-align: left; flex: 1; position: relative; overflow: hidden;
+    display: flex; flex-direction: column; transform-style: preserve-3d; opacity: 0; transform: translateY(40px);
+}
+.tier-card::after { content: ''; position: absolute; left: -1px; top: 0; bottom: 0; width: 3px; }
+.tier-1::after { background: var(--amber); }
+.tier-2::after { background: var(--teal); }
+.tier-badge {
+    position: absolute; top: 0; right: 0; padding: 6px 12px; font-weight: 700; font-size: 10px;
+    letter-spacing: 0.1em; border-radius: 0 16px 0 12px; font-family: var(--font-body);
+}
+.badge-amber { background: var(--amber); color: var(--bg); }
+.badge-teal { background: var(--teal); color: var(--bg); }
+
+.tier-icon { width: 48px; height: 48px; margin-bottom: 24px; }
+.tier-h3 { font-family: var(--font-display); font-weight: 700; font-size: 28px; color: var(--white); margin-bottom: 8px; }
+.tier-sub { font-size: 14px; color: var(--muted); margin-bottom: 32px; min-height: 42px; }
+
+.tier-feats { display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; flex: 1; }
+.t-feat { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: var(--white); line-height: 1.4; }
+.t-check { width: 20px; height: 20px; fill: var(--teal); flex-shrink: 0; margin-top: 1px; }
+
+.tier-btn { width: 100%; border-radius: var(--radius-sm); padding: 16px; font-weight: 600; font-size: 15px; display: flex; justify-content: center; align-items: center; }
+.t-btn-amber { background: var(--amber); color: var(--bg); }
+.t-btn-teal { background: var(--teal); color: var(--bg); }
+.tier-btn:hover { transform: scale(1.02); filter: brightness(1.1); }
+
+.tier-conn { width: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; opacity: 0; }
+.conn-line { width: 1px; height: 60px; background: var(--border); }
+.conn-circle { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border); background: var(--bg2); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: var(--muted); position: relative; z-index: 2; margin: -1px 0; }
+
+.reassurance {
+    background: var(--bg3); border-radius: 12px; padding: 20px 32px; max-width: 800px;
+    margin: 0 auto; color: var(--muted); font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 12px; line-height: 1.5; opacity: 0; transform: translateY(20px);
+}
+.re-icon { width: 20px; height: 20px; stroke: var(--muted); fill: none; stroke-width: 2; flex-shrink: 0; }
+
+@media(max-width: 900px) {
+    .tiers-wrap { flex-direction: column; gap: 40px; }
+    .tier-conn { width: 100%; height: 80px; flex-direction: row; margin: -20px 0; }
+    .conn-line { width: 60px; height: 1px; }
+    .conn-circle { margin: 0 -1px; }
+}
+
+/* CSS_PLACEHOLDER: STATS_STYLES */
+.stats-sec { background: var(--bg); padding: 100px 5%; text-align: center; }
+.quote-block {
+    max-width: 800px; margin: 0 auto; padding-left: 32px; border-left: 3px solid var(--amber);
+    position: relative; text-align: left; margin-bottom: 80px; opacity: 0; transform: translateX(-40px);
+}
+.quote-mark { position: absolute; left: -20px; top: -40px; font-family: var(--font-display); font-weight: 800; font-size: 120px; color: var(--amber); opacity: 0.15; line-height: 1; }
+.quote-text { font-family: var(--font-display); font-weight: 700; font-style: italic; font-size: clamp(22px, 3vw, 32px); color: var(--white); margin-bottom: 24px; line-height: 1.4; position: relative; z-index: 2; }
+.quote-attr { font-size: 14px; color: var(--muted); }
+
+.stats-div { height: 1px; background: var(--border); max-width: 1000px; margin: 0 auto 80px; }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 1000px; margin: 0 auto; }
+.stat-item { position: relative; opacity: 0; transform: scale(0.9); }
+.stat-item:not(:last-child)::after { content: ''; position: absolute; right: -12px; top: 10%; height: 80%; width: 1px; background: var(--border); }
+.stat-num { font-family: var(--font-display); font-weight: 800; font-style: italic; font-size: clamp(48px, 6vw, 72px); color: var(--amber); line-height: 1; margin-bottom: 12px; }
+.stat-label { font-size: 15px; color: var(--muted); line-height: 1.4; padding: 0 10px; }
+
+@media(max-width: 768px) {
+    .stats-grid { grid-template-columns: 1fr 1fr; gap: 48px 24px; }
+    .stat-item:not(:last-child)::after { display: none; }
+}
+/* CSS_PLACEHOLDER: FOOTER_STYLES */
+.cta-sec { background: var(--bg2); padding: 160px 5%; min-height: 80vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; text-align: center; }
+.cta-canvas-wrapper { position: absolute; inset: 0; z-index: 0; opacity: 0; }
+.cta-content { position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; }
+.cta-eyebrow { color: var(--teal); font-family: var(--font-body); font-weight: 500; font-size: 14px; letter-spacing: 0.1em; margin-bottom: 24px; text-transform: uppercase; }
+.cta-h2 { font-family: var(--font-display); font-weight: 800; font-style: italic; font-size: clamp(56px, 9vw, 120px); line-height: 0.95; color: var(--white); margin-bottom: 32px; }
+.cta-line { display: block; opacity: 0; transform: translateY(60px); }
+.cta-h2 .text-amber { color: var(--amber); }
+.cta-sub { font-size: 18px; color: var(--muted); margin-bottom: 48px; opacity: 0; }
+.cta-buttons { display: flex; gap: 16px; opacity: 0; transform: translateY(20px); }
+
+.site-footer { background: #04040A; border-top: 1px solid var(--border); padding: 48px 5% 32px; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; max-width: 1200px; margin: 0 auto 64px; }
+.f-brand { font-family: var(--font-display); font-weight: 800; font-size: 16px; color: var(--white); margin-bottom: 8px; }
+.f-tagline { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+.f-socials { display: flex; gap: 12px; }
+.f-soc-link { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.f-soc-link:hover { border-color: var(--border-hover); background: rgba(255,255,255,0.05); }
+.f-soc-link svg { width: 16px; height: 16px; fill: var(--muted); stroke: none; transition: fill 0.2s; }
+.f-soc-link:first-child svg { stroke: var(--muted); stroke-width: 2; fill: none; transition: stroke 0.2s; }
+.f-soc-link:first-child:hover svg { stroke: var(--white); }
+.f-soc-link:nth-child(2) svg { stroke: var(--muted); stroke-width: 2; fill: none; transition: stroke 0.2s; }
+.f-soc-link:nth-child(2):hover svg { stroke: var(--white); }
+.f-soc-link:hover svg { fill: var(--white); }
+
+.f-title { font-size: 12px; font-weight: 600; color: var(--white); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 20px; font-family: var(--font-body); }
+.f-links { display: flex; flex-direction: column; gap: 12px; }
+.f-link { font-size: 14px; color: var(--muted); transition: color 0.2s; }
+.f-link:hover { color: var(--white); }
+
+.f-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--muted); }
+
+.scroll-top-btn {
+    position: fixed; bottom: 32px; right: 32px; width: 48px; height: 48px; border-radius: 50%;
+    background: var(--card); border: 1px solid var(--border); z-index: 500;
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+    opacity: 0; pointer-events: none; transform: scale(0.8); transition: all 0.3s;
+}
+.scroll-top-btn.visible { opacity: 1; pointer-events: auto; transform: scale(1); }
+.scroll-top-btn:hover { border-color: var(--amber); box-shadow: 0 0 15px rgba(240,165,0,0.2); }
+
+@media(max-width: 900px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px 24px; }
+    .f-brand-col { grid-column: span 2; }
+    .f-bottom { flex-direction: column; gap: 16px; text-align: center; }
+}
+
+    </style>
+</head>
+<body>
+
+    <nav class="main-nav" id="mainNav">
+        <a href="#" class="nav-logo">PATHFINDER<span class="nav-logo-sup">AI</span></a>
+        <div class="nav-links">
+            <a href="#how-it-works" class="nav-link">How It Works</a>
+            <a href="#vault-section" class="nav-link">The Vault</a>
+            <a href="#sessions" class="nav-link">For Mentors</a>
+            <a href="#stats" class="nav-link">For Schools</a>
+        </div>
+        <div class="nav-btn-wrapper">
+            <button class="pill-btn pill-amber nav-btn font-body" onclick="document.getElementById('discovery-chat').scrollIntoView()">Begin Discovery</button>
+        </div>
+        <div class="hamburger" id="hamburger" aria-label="Menu">
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+        </div>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#how-it-works" class="mobile-link" onclick="document.getElementById('hamburger').click()">How It Works</a>
+        <a href="#vault-section" class="mobile-link" style="transition-delay: 0.1s" onclick="document.getElementById('hamburger').click()">The Vault</a>
+        <a href="#sessions" class="mobile-link" style="transition-delay: 0.2s" onclick="document.getElementById('hamburger').click()">For Mentors</a>
+        <a href="#stats" class="mobile-link" style="transition-delay: 0.3s" onclick="document.getElementById('hamburger').click()">For Schools</a>
+        <button class="pill-btn pill-amber mobile-link font-body" style="transition-delay: 0.4s" onclick="document.getElementById('discovery-chat').scrollIntoView(); document.getElementById('hamburger').click();">Begin Discovery</button>
+    </div>
+
+    <section class="hero-sec bg-even" id="home">
+        <div class="hero-glow-1"></div>
+        <div class="hero-glow-2"></div>
+        <div class="hero-noise"></div>
+        
+        <div class="hero-content">
+            <div class="eyebrow" id="heroEyebrow">Career Discovery Platform</div>
+            <h1 class="hero-h1" id="heroH1">
+                <span class="split-word">Your </span> <span class="split-word">future </span> <span class="split-word">isn't </span> <span class="split-word">a </span><br>
+                <span class="italic-word">multiple-choice
+                    <svg class="hero-underline" viewBox="0 0 300 12" preserveAspectRatio="none">
+                        <path id="heroWavyLine" d="M0 6 Q 30 0, 60 6 T 120 6 T 180 6 T 240 6 T 300 6" fill="none" stroke="var(--amber)" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                </span>
+                <span class="split-word">question.</span>
+            </h1>
+            <p class="hero-sub font-body" id="heroSub">Real professionals. Near-peers who've done the degree. 5 questions to your Career Reality Matrix.</p>
+            <div class="hero-ctas" id="heroCtas">
+                <button class="pill-btn pill-amber font-body" onclick="document.getElementById('discovery-chat').scrollIntoView()">Begin Discovery</button>
+                <button class="pill-btn pill-teal-outline font-body" onclick="document.getElementById('how-it-works').scrollIntoView()">Watch how it works &#9654;</button>
+            </div>
+            <div class="trust-bar" id="heroTrust">
+                <span>&#10022; 2,400 matrices generated</span>
+                <span class="trust-sep"></span>
+                <span>&#10022; 180 professionals</span>
+                <span class="trust-sep"></span>
+                <span>&#10022; 47 universities</span>
+            </div>
+        </div>
+
+        <div class="hero-canvas-wrapper" id="canvasWrapper">
+            <canvas id="heroCanvas"></canvas>
+        </div>
+
+        <div class="scroll-ind" id="scrollInd">
+            scroll to explore
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+    <section class="problem-sec" id="problem">
+        <span class="section-label">THE REALITY CHECK</span>
+        <h2 class="sec-headline">Most students pick their degree the way they pick a Netflix show.</h2>
+        
+        <div class="problem-grid">
+            <div class="tilt-card problem-card">
+                <div class="card-shine"></div>
+                <div class="card-num">01</div>
+                <h3 class="card-title">You're betting $80,000 on a Google search.</h3>
+                <p class="card-body">Most degree choices trace back to a parent's suggestion, a TV show, or a single vague quiz result.</p>
+            </div>
+            <div class="tilt-card problem-card tilt-teal-edge">
+                <div class="card-shine"></div>
+                <div class="card-num card-num-teal">02</div>
+                <h3 class="card-title">The people who know the truth are too busy.</h3>
+                <p class="card-body">Industry professionals want to help. They just can't commit to hour-long mentorship sessions every week.</p>
+            </div>
+            <div class="tilt-card problem-card">
+                <div class="card-shine"></div>
+                <div class="card-num">03</div>
+                <h3 class="card-title">Career quizzes tell you to be an 'Analyst'. That means nothing.</h3>
+                <p class="card-body">Generic labels without context create false confidence. You need a real person's Tuesday afternoon, not a percentage match.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="pathway-sec" id="how-it-works">
+        <span class="section-label">THE PATHWAY</span>
+        <h2 class="sec-headline sec-headline-sub">Three steps from confused to certain.</h2>
+
+        <div class="timeline-wrapper">
+            <svg class="timeline-svg" viewBox="0 0 1000 2" preserveAspectRatio="none">
+                <path class="timeline-path h-line" d="M0 1 L1000 1"/>
+            </svg>
+            <svg class="timeline-svg-mobile" viewBox="0 0 2 1000" preserveAspectRatio="none">
+                <path class="timeline-path v-line" d="M1 0 L1 1000"/>
+            </svg>
+
+            <div class="pathway-grid">
+                <div class="pathway-col">
+                    <div class="path-node count-node" data-target="1">0</div>
+                    <div class="tilt-card pathway-card">
+                        <div class="card-shine"></div>
+                        <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            <path d="M12 7v6 M12 17h.01" stroke="var(--teal)"/>
+                        </svg>
+                        <br>
+                        <span class="step-tag tag-teal">AI Powered</span>
+                        <h3 class="step-title">The Discovery Engine</h3>
+                        <p class="card-body">Answer 5 situational questions with our AI. Not 'do you like people?' &mdash; but real scenario-based questions that reveal how you actually think and solve problems.</p>
+                    </div>
+                </div>
+
+                <div class="pathway-col">
+                    <div class="path-node count-node" data-target="2">0</div>
+                    <div class="tilt-card pathway-card">
+                        <div class="card-shine"></div>
+                        <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10" stroke-dasharray="4 4"/>
+                            <polygon points="10 8 16 12 10 16 10 8" fill="var(--amber)" stroke="none"/>
+                        </svg>
+                        <br>
+                        <span class="step-tag tag-amber">On Demand</span>
+                        <h3 class="step-title">The Reality Vault</h3>
+                        <p class="card-body">Unlock audio recordings of real professionals answering the brutal questions &mdash; what's your worst Tuesday? What would you tell your 17-year-old self?</p>
+                    </div>
+                </div>
+
+                <div class="pathway-col">
+                    <div class="path-node count-node" data-target="3">0</div>
+                    <div class="tilt-card pathway-card">
+                        <div class="card-shine"></div>
+                        <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="var(--white)" stroke-width="1.5">
+                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 00-3-3.87 M16 3.13a4 4 0 010 7.75" opacity="0.5"/>
+                            <circle cx="12" cy="18" r="3" fill="var(--muted)" stroke="none"/>
+                        </svg>
+                        <br>
+                        <span class="step-tag tag-white">Live Session</span>
+                        <h3 class="step-title">The 15-Minute Check</h3>
+                        <p class="card-body">Book a tightly controlled 15-minute call with a near-peer uni student or industry vet. Agenda pre-generated. Room closes automatically.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="chat-sec" id="discovery-chat">
+        <div class="chat-grid">
+            <div class="chat-info">
+                <span class="section-label">MEET PATHFINDER</span>
+                <h2 class="chat-h2">5 questions.<br>Your Career Reality Matrix.</h2>
+                <p class="chat-sub">Pathfinder doesn't ask what jobs you like. It asks how you think. Situational questions reveal your actual working style &mdash; then maps it to real careers that fit.</p>
+                <div class="chat-features">
+                    <div class="chat-feat-row">
+                        <svg class="feat-icon" viewBox="0 0 24 24"><polygon points="12 2 15 9 22 12 15 15 12 22 9 15 2 12 9 9 12 2"/></svg>
+                        Scenario-based questions, not generic prompts
+                    </div>
+                    <div class="chat-feat-row">
+                        <svg class="feat-icon" viewBox="0 0 24 24"><polygon points="12 2 15 9 22 12 15 15 12 22 9 15 2 12 9 9 12 2"/></svg>
+                        Career Reality Matrix output &mdash; why you fit, not just what fits
+                    </div>
+                    <div class="chat-feat-row">
+                        <svg class="feat-icon" viewBox="0 0 24 24"><polygon points="12 2 15 9 22 12 15 15 12 22 9 15 2 12 9 9 12 2"/></svg>
+                        Unlock the Vault after your Matrix is ready
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-widget">
+                <div class="cw-header">
+                    <div class="cw-user">
+                        <div class="cw-avatar">PF</div>
+                        <div>
+                            <div class="cw-name">Pathfinder AI</div>
+                            <div class="cw-status"><span class="cw-dot"></span> Online</div>
+                        </div>
+                    </div>
+                    <div class="cw-progress-wrap">
+                        <div class="cw-prog-text" id="cwCount">Question 1 of 5</div>
+                        <div class="cw-prog-bar"><div class="cw-prog-fill" id="cwFill" style="width: 20%;"></div></div>
+                    </div>
+                </div>
+
+                <div class="cw-body" id="cwBody">
+                    <!-- Messages go here -->
+                </div>
+
+                <div class="cw-input-area" id="cwInputArea">
+                    <input type="text" class="cw-input" id="cwInput" placeholder="Type your answer..." autocomplete="off">
+                    <button class="cw-send" id="cwSend" disabled>
+                        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </button>
+                </div>
+                <div class="unlock-msg" id="cwUnlockMsg">&#10022; Your Reality Vault is now unlocked</div>
+            </div>
+        </div>
+
+        <div class="career-cards-wrap" id="careerWrap">
+            <span class="section-label" style="text-align: center; margin-bottom: 32px;">EXPLORE YOUR CAREERS</span>
+            <div class="career-cards-grid" id="careerGrid">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+    </section>
+    <section class="vault-sec" id="vault-section">
+        <span class="section-label" style="text-align:center;">THE REALITY VAULT</span>
+        <h2 class="sec-headline" style="font-size: clamp(28px, 4vw, 42px);">Unfiltered. 3 minutes. From people doing the actual work.</h2>
+        
+        <div class="vault-tabs" id="vTabs">
+            <button class="v-tab active" data-filter="all">All</button>
+            <button class="v-tab" data-filter="technology">Technology</button>
+            <button class="v-tab" data-filter="medicine">Medicine</button>
+            <button class="v-tab" data-filter="law">Law</button>
+            <button class="v-tab" data-filter="finance">Finance</button>
+            <button class="v-tab" data-filter="design">Design</button>
+            <button class="v-tab" data-filter="engineering">Engineering</button>
+        </div>
+
+        <div class="vault-grid" id="vGrid">
+            <!-- 1. Technology -->
+            <div class="tilt-card vc-card" data-careers="technology,cybersecurity">
+                <div class="card-shine"></div>
+                <div class="vc-wave">
+                    <div class="vc-bar animated" style="height: 8px; --anim-dur: 0.8s;"></div>
+                    <div class="vc-bar animated" style="height: 20px; --anim-dur: 1.1s;"></div>
+                    <div class="vc-bar animated" style="height: 32px; --anim-dur: 0.9s;"></div>
+                    <div class="vc-bar animated" style="height: 16px; --anim-dur: 0.7s;"></div>
+                    <div class="vc-bar animated" style="height: 40px; --anim-dur: 1.0s;"></div>
+                    <div class="vc-bar animated" style="height: 28px; --anim-dur: 1.2s;"></div>
+                    <div class="vc-bar animated" style="height: 36px; --anim-dur: 0.8s;"></div>
+                    <div class="vc-bar animated" style="height: 24px; --anim-dur: 0.9s;"></div>
+                    <div class="vc-bar animated" style="height: 18px; --anim-dur: 1.1s;"></div>
+                    <div class="vc-bar animated" style="height: 38px; --anim-dur: 0.7s;"></div>
+                    <div class="vc-bar animated" style="height: 14px; --anim-dur: 1.0s;"></div>
+                    <div class="vc-bar animated" style="height: 22px; --anim-dur: 0.8s;"></div>
+                </div>
+                <div class="vc-prof">
+                    <div class="vc-avatar">AK</div>
+                    <div>
+                        <div class="vc-name">Aisha K.</div>
+                        <div class="vc-role">Cybersecurity Analyst <span class="vc-exp">8 yrs</span></div>
+                    </div>
+                </div>
+                <div class="vc-q">What does your actual Tuesday look like?</div>
+                <div class="vc-bottom">
+                    <span class="vc-tag">Technology</span>
+                    <button class="vc-play" onclick="openAudioModal('Aisha K.', 'Cybersecurity Analyst', '8', 'What does your actual Tuesday look like?')">&#9654; Play Clip</button>
+                </div>
+            </div>
+
+            <!-- 2. Engineering -->
+            <div class="tilt-card vc-card" data-careers="engineering,biomedical">
+                <div class="card-shine"></div>
+                <div class="vc-wave">
+                    <div class="vc-bar animated" style="height: 12px; --anim-dur: 0.9s;"></div>
+                    <div class="vc-bar animated" style="height: 28px; --anim-dur: 0.7s;"></div>
+                    <div class="vc-bar animated" style="height: 18px; --anim-dur: 1.1s;"></div>
+                    <div class="vc-bar animated" style="height: 36px; --anim-dur: 0.8s;"></div>
+                    <div class="vc-bar animated" style="height: 22px; --anim-dur: 1.2s;"></div>
+                    <div class="vc-bar animated" style="height: 30px; --anim-dur: 0.9s;"></div>
+                    <div class="vc-bar animated" style="height: 40px; --anim-dur: 1.0s;"></div>
+                    <div class="vc-bar animated" style="height: 16px; --anim-dur: 0.7s;"></div>
+                    <div class="vc-bar animated" style="height: 24px; --anim-dur: 0.8s;"></div>
+                    <div class="vc-bar animated" style="height: 10px; --anim-dur: 1.1s;"></div>
+                    <div class="vc-bar animated" style="height: 32px; --anim-dur: 0.9s;"></div>
+                    <div class="vc-bar animated" style="height: 18px; --anim-dur: 1.0s;"></div>
+                </div>
+                <div class="vc-prof">
+                    <div class="vc-avatar">MT</div>
+                    <div>
+                        <div class="vc-name">Marcus T.</div>
+                        <div class="vc-role">Biomedical Engineer <span class="vc-exp">6 yrs</span></div>
+                    </div>
+                </div>
+                <div class="vc-q">What would you tell yourself at 17?</div>
+                <div class="vc-bottom">
+                    <span class="vc-tag">Engineering</span>
+                    <button class="vc-play" onclick="openAudioModal('Marcus T.', 'Biomedical Engineer', '6', 'What would you tell yourself at 17?')">&#9654; Play Clip</button>
+                </div>
+            </div>
+
+            <!-- 3. Law (LOCKED) -->
+            <div class="tilt-card vc-card locked" data-careers="law,legal">
+                <div class="card-shine"></div>
+                <div class="vc-locked">
+                    <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    <div class="lock-text">Unlock with your Career Matrix</div>
+                </div>
+                <div class="vc-wave">
+                    <div class="vc-bar" style="height: 20px;"></div><div class="vc-bar" style="height: 14px;"></div>
+                    <div class="vc-bar" style="height: 32px;"></div><div class="vc-bar" style="height: 18px;"></div>
+                    <div class="vc-bar" style="height: 24px;"></div><div class="vc-bar" style="height: 10px;"></div>
+                    <div class="vc-bar" style="height: 36px;"></div><div class="vc-bar" style="height: 16px;"></div>
+                    <div class="vc-bar" style="height: 28px;"></div><div class="vc-bar" style="height: 22px;"></div>
+                    <div class="vc-bar" style="height: 12px;"></div><div class="vc-bar" style="height: 30px;"></div>
+                </div>
+                <div class="vc-prof">
+                    <div class="vc-avatar" style="color:var(--muted)">PM</div>
+                    <div>
+                        <div class="vc-name" style="color:var(--muted)">Priya M.</div>
+                        <div class="vc-role">Corporate Lawyer <span class="vc-exp" style="border-color:var(--muted);color:var(--muted)">11 yrs</span></div>
+                    </div>
+                </div>
+                <div class="vc-q">Biggest misconception about your field?</div>
+                <div class="vc-bottom">
+                    <span class="vc-tag" style="border-color:var(--muted);color:var(--muted)">Law</span>
+                </div>
+            </div>
+
+            <!-- 4. Design (LOCKED) -->
+            <div class="tilt-card vc-card locked" data-careers="design,technology">
+                <div class="card-shine"></div>
+                <div class="vc-locked">
+                    <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    <div class="lock-text">Unlock with your Career Matrix</div>
+                </div>
+                <div class="vc-wave">
+                    <div class="vc-bar" style="height: 16px;"></div><div class="vc-bar" style="height: 24px;"></div>
+                    <div class="vc-bar" style="height: 10px;"></div><div class="vc-bar" style="height: 32px;"></div>
+                    <div class="vc-bar" style="height: 18px;"></div><div class="vc-bar" style="height: 28px;"></div>
+                    <div class="vc-bar" style="height: 12px;"></div><div class="vc-bar" style="height: 20px;"></div>
+                    <div class="vc-bar" style="height: 36px;"></div><div class="vc-bar" style="height: 14px;"></div>
+                    <div class="vc-bar" style="height: 22px;"></div><div class="vc-bar" style="height: 30px;"></div>
+                </div>
+                <div class="vc-prof">
+                    <div class="vc-avatar" style="color:var(--muted)">JO</div>
+                    <div>
+                        <div class="vc-name" style="color:var(--muted)">James O.</div>
+                        <div class="vc-role">UX Designer <span class="vc-exp" style="border-color:var(--muted);color:var(--muted)">7 yrs</span></div>
+                    </div>
+                </div>
+                <div class="vc-q">Most tedious part of your job?</div>
+                <div class="vc-bottom">
+                    <span class="vc-tag" style="border-color:var(--muted);color:var(--muted)">Design</span>
+                </div>
+            </div>
+
+            <!-- 5. Medicine (LOCKED) -->
+            <div class="tilt-card vc-card locked" data-careers="medicine,healthcare">
+                <div class="card-shine"></div>
+                <div class="vc-locked">
+                    <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    <div class="lock-text">Unlock with your Career Matrix</div>
+                </div>
+                <div class="vc-wave">
+                    <div class="vc-bar" style="height: 24px;"></div><div class="vc-bar" style="height: 12px;"></div>
+                    <div class="vc-bar" style="height: 38px;"></div><div class="vc-bar" style="height: 16px;"></div>
+                    <div class="vc-bar" style="height: 28px;"></div><div class="vc-bar" style="height: 20px;"></div>
+                    <div class="vc-bar" style="height: 34px;"></div><div class="vc-bar" style="height: 14px;"></div>
+                    <div class="vc-bar" style="height: 22px;"></div><div class="vc-bar" style="height: 30px;"></div>
+                    <div class="vc-bar" style="height: 18px;"></div><div class="vc-bar" style="height: 26px;"></div>
+                </div>
+                <div class="vc-prof">
+                    <div class="vc-avatar" style="color:var(--muted)">LR</div>
+                    <div>
+                        <div class="vc-name" style="color:var(--muted)">Leila R.</div>
+                        <div class="vc-role">Nurse Practitioner <span class="vc-exp" style="border-color:var(--muted);color:var(--muted)">9 yrs</span></div>
+                    </div>
+                </div>
+                <div class="vc-q">What almost made you quit?</div>
+                <div class="vc-bottom">
+                    <span class="vc-tag" style="border-color:var(--muted);color:var(--muted)">Medicine</span>
+                </div>
+            </div>
+
+            <!-- 6. Finance (LOCKED) -->
+            <div class="tilt-card vc-card locked" data-careers="finance,business">
+                <div class="card-shine"></div>
+                <div class="vc-locked">
+                    <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    <div class="lock-text">Unlock with your Career Matrix</div>
+                </div>
+                <div class="vc-wave">
+                    <div class="vc-bar" style="height: 18px;"></div><div class="vc-bar" style="height: 32px;"></div>
+                    <div class="vc-bar" style="height: 14px;"></div><div class="vc-bar" style="height: 28px;"></div>
+                    <div class="vc-bar" style="height: 22px;"></div><div class="vc-bar" style="height: 10px;"></div>
+                    <div class="vc-bar" style="height: 36px;"></div><div class="vc-bar" style="height: 16px;"></div>
+                    <div class="vc-bar" style="height: 24px;"></div><div class="vc-bar" style="height: 30px;"></div>
+                    <div class="vc-bar" style="height: 12px;"></div><div class="vc-bar" style="height: 20px;"></div>
+                </div>
+                <div class="vc-prof">
+                    <div class="vc-avatar" style="color:var(--muted)">DC</div>
+                    <div>
+                        <div class="vc-name" style="color:var(--muted)">Daniel C.</div>
+                        <div class="vc-role">Investment Analyst <span class="vc-exp" style="border-color:var(--muted);color:var(--muted)">5 yrs</span></div>
+                    </div>
+                </div>
+                <div class="vc-q">What didn't your degree prepare you for?</div>
+                <div class="vc-bottom">
+                    <span class="vc-tag" style="border-color:var(--muted);color:var(--muted)">Finance</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Audio Modal -->
+    <div class="audio-modal-wrap" id="audioModalWrap" onclick="if(event.target===this) closeAudioModal()">
+        <div class="audio-modal">
+            <div class="am-close" onclick="closeAudioModal()"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></div>
+            <div class="vc-prof" id="amProfInfo" style="margin-bottom:0"></div>
+            <div class="am-title" id="amTitle">Day in the Life</div>
+            
+            <div class="am-player">
+                <div class="am-controls">
+                    <button class="am-play-btn" id="amPlayBtn" onclick="toggleAudio()">
+                        <svg viewBox="0 0 24 24" id="amPlayIcon"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    </button>
+                    <div class="am-wave" id="amWave">
+                        <div class="am-bar animated" style="height: 12px; --anim-dur: 0.9s;"></div>
+                        <div class="am-bar animated" style="height: 20px; --anim-dur: 0.7s;"></div>
+                        <div class="am-bar animated" style="height: 32px; --anim-dur: 1.1s;"></div>
+                        <div class="am-bar animated" style="height: 24px; --anim-dur: 0.8s;"></div>
+                        <div class="am-bar animated" style="height: 16px; --anim-dur: 1.2s;"></div>
+                        <div class="am-bar animated" style="height: 36px; --anim-dur: 0.9s;"></div>
+                        <div class="am-bar animated" style="height: 28px; --anim-dur: 1.0s;"></div>
+                        <div class="am-bar animated" style="height: 14px; --anim-dur: 0.7s;"></div>
+                        <div class="am-bar animated" style="height: 22px; --anim-dur: 0.8s;"></div>
+                        <div class="am-bar animated" style="height: 40px; --anim-dur: 1.1s;"></div>
+                        <div class="am-bar animated" style="height: 30px; --anim-dur: 0.9s;"></div>
+                        <div class="am-bar animated" style="height: 18px; --anim-dur: 1.0s;"></div>
+                        <div class="am-bar animated" style="height: 26px; --anim-dur: 0.8s;"></div>
+                        <div class="am-bar animated" style="height: 34px; --anim-dur: 1.2s;"></div>
+                        <div class="am-bar animated" style="height: 12px; --anim-dur: 0.7s;"></div>
+                        <div class="am-bar animated" style="height: 20px; --anim-dur: 1.1s;"></div>
+                        <div class="am-bar animated" style="height: 38px; --anim-dur: 0.9s;"></div>
+                        <div class="am-bar animated" style="height: 16px; --anim-dur: 1.0s;"></div>
+                    </div>
+                </div>
+                <div class="am-prog-wrap">
+                    <div class="am-progress"><div class="am-fill" id="amFill"></div></div>
+                    <div class="am-time" id="amTime">0:00 / 0:00</div>
+                </div>
+            </div>
+
+            <div class="am-text" id="amText">Generating response...</div>
+        </div>
+    </div>
+    <section class="tiers-sec" id="sessions">
+        <span class="section-label">THE SESSIONS</span>
+        <h2 class="sec-headline" style="font-size: clamp(36px, 5vw, 60px);">Two tiers of truth.</h2>
+        <p class="tiers-sub font-body">Start with someone who survived the degree. Then go deeper.</p>
+
+        <div class="tiers-wrap">
+            <div class="tier-card tier-1">
+                <div class="tier-badge badge-amber">START HERE</div>
+                <svg class="tier-icon" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 00-3-3.87 M16 3.13a4 4 0 010 7.75" stroke="var(--teal)" opacity="0.5"/>
+                </svg>
+                <h3 class="tier-h3">Near-Peer Sessions</h3>
+                <p class="tier-sub">University juniors &amp; seniors in your matched field</p>
+                
+                <div class="tier-feats">
+                    <div class="t-feat"><svg class="t-check" viewBox="0 0 24 24" stroke="none"><path d="M20 6L9 17l-5-5"/></svg> 15-minute structured video call</div>
+                    <div class="t-feat"><svg class="t-check" viewBox="0 0 24 24" stroke="none"><path d="M20 6L9 17l-5-5"/></svg> AI-generated agenda from your profile</div>
+                    <div class="t-feat"><svg class="t-check" viewBox="0 0 24 24" stroke="none"><path d="M20 6L9 17l-5-5"/></svg> Relatable: they just survived the degree</div>
+                    <div class="t-feat"><svg class="t-check" viewBox="0 0 24 24" stroke="none"><path d="M20 6L9 17l-5-5"/></svg> Verifiable leadership credential for them</div>
+                </div>
+                
+                <button class="tier-btn t-btn-amber">Request Near-Peer Session</button>
+            </div>
+
+            <div class="tier-conn">
+                <div class="conn-line"></div>
+                <div class="conn-circle">THEN</div>
+                <div class="conn-line"></div>
+            </div>
+
+            <div class="tier-card tier-2">
+                <div class="tier-badge badge-teal">DEEP DIVE</div>
+                <svg class="tier-icon" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.5">
+                    <path d="M3 21h18 M5 21V7a2 2 0 012-2h4 M19 21V11a2 2 0 00-2-2h-4 M11 5V3 M11 5a2 2 0 00-2 2v14 M11 5a2 2 0 012 2v14"/>
+                    <circle cx="15" cy="15" r="2" stroke="none" fill="var(--amber)"/>
+                </svg>
+                <h3 class="tier-h3">Professional Sessions</h3>
+                <p class="tier-sub">Verified industry veterans, 5+ years experience</p>
+                
+                <div class="tier-feats">
+                    <div class="t-feat"><svg class="t-check" viewBox="0 0 24 24" stroke="none"><path d="M20 6L9 17l-5-5"/></svg> Verified industry veterans, 5+ years experience</div>
+                    <div class="t-feat"><svg class="t-check" viewBox="0 0 24 24" stroke="none"><path d="M20 6L9 17l-5-5"/></svg> AI-generated agenda from your full profile</div>
+                    <div class="t-feat"><svg class="t-check" viewBox="0 0 24 24" stroke="none"><path d="M20 6L9 17l-5-5"/></svg> Long-term career clarity, not just degree advice</div>
+                    <div class="t-feat"><svg class="t-check" viewBox="0 0 24 24" stroke="none"><path d="M20 6L9 17l-5-5"/></svg> Auto-closing room &mdash; 15 minutes guaranteed</div>
+                </div>
+                
+                <button class="tier-btn t-btn-teal">Request Pro Session</button>
+            </div>
+        </div>
+
+        <div class="reassurance">
+            <svg class="re-icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            Every session runs on a pre-set AI agenda. Room closes at 15 minutes. No wasted time. No awkward silences.
+        </div>
+    </section>
+
+    <section class="stats-sec" id="stats">
+        <div class="quote-block">
+            <div class="quote-mark">"</div>
+            <div class="quote-text">I thought I wanted to be a surgeon. After 3 sessions, I'm studying biomedical engineering and I've never been more sure of anything.</div>
+            <div class="quote-attr">&mdash; Zara M., Grade 12, Abu Dhabi</div>
+        </div>
+
+        <div class="stats-div"></div>
+
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-item">
+                <div class="stat-num" data-val="2400+">0</div>
+                <div class="stat-label">Students with their matrix</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num" data-val="180+">0</div>
+                <div class="stat-label">Professionals in the vault</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num" data-val="94%">0</div>
+                <div class="stat-label">Said sessions changed their thinking</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num" data-val="47">0</div>
+                <div class="stat-label">Universities with near-peers</div>
+            </div>
+        </div>
+    </section>
+    <section class="cta-sec" id="about">
+        <div class="cta-canvas-wrapper" id="ctaCanvasWrapper">
+            <canvas id="ctaCanvas"></canvas>
+        </div>
+        
+        <div class="cta-content">
+            <div class="cta-eyebrow">Ready?</div>
+            <h2 class="cta-h2">
+                <span class="cta-line">Stop guessing.</span>
+                <span class="cta-line text-amber">Start knowing.</span>
+                <span class="cta-line">Your path exists.</span>
+            </h2>
+            <p class="cta-sub font-body">It takes 5 questions to find out where you belong.</p>
+            <div class="cta-buttons">
+                <button class="pill-btn pill-amber font-body" onclick="document.getElementById('discovery-chat').scrollIntoView()">Begin Discovery</button>
+                <button class="pill-btn pill-teal-outline font-body" onclick="document.getElementById('sessions').scrollIntoView()">I'm a Mentor &rarr;</button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div class="f-brand-col">
+                <div class="f-brand">PATHFINDER AI</div>
+                <div class="f-tagline">Reality-first career discovery.</div>
+                <div class="f-socials">
+                    <a href="#" class="f-soc-link" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+                    <a href="#" class="f-soc-link" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                    <a href="#" class="f-soc-link" aria-label="X"><svg viewBox="0 0 24 24"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a>
+                </div>
+            </div>
+            
+            <div>
+                <div class="f-title">Product</div>
+                <div class="f-links">
+                    <a href="#how-it-works" class="f-link">How It Works</a>
+                    <a href="#vault-section" class="f-link">The Vault</a>
+                    <a href="#discovery-chat" class="f-link">Discovery Engine</a>
+                </div>
+            </div>
+
+            <div>
+                <div class="f-title">For</div>
+                <div class="f-links">
+                    <a href="#" class="f-link">For Students</a>
+                    <a href="#sessions" class="f-link">For Mentors</a>
+                    <a href="#" class="f-link">For Schools</a>
+                    <a href="#" class="f-link">For Companies</a>
+                </div>
+            </div>
+
+            <div>
+                <div class="f-title">Legal</div>
+                <div class="f-links">
+                    <a href="#" class="f-link">Privacy Policy</a>
+                    <a href="#" class="f-link">Terms</a>
+                    <a href="#" class="f-link">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="f-bottom">
+            <div>&copy; 2025 Pathfinder AI. Built to tell the truth.</div>
+            <div>Made with purpose.</div>
+        </div>
+    </footer>
+
+    <button id="scrollTopBtn" class="scroll-top-btn" aria-label="Scroll to top" title="Scroll to top">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+window.GEMINI_API_KEY = "__GEMINI_KEY__";
+const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + window.GEMINI_API_KEY;
+
+/* JS_PLACEHOLDER: GLOBALS */
+// --- Navigation & Scroll to Top ---
+const mainNav = document.getElementById('mainNav');
+const scrollTopBtn = document.getElementById('scrollTopBtn');
+window.addEventListener('scroll', () => {
+    if(window.scrollY > 80) mainNav.classList.add('scrolled');
+    else mainNav.classList.remove('scrolled');
+    
+    if(window.scrollY > 400) scrollTopBtn.classList.add('visible');
+    else scrollTopBtn.classList.remove('visible');
+});
+scrollTopBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+// --- Mobile Menu ---
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+});
+
+// --- Vault Filtering ---
+const vTabs = document.querySelectorAll('.v-tab');
+const vCards = document.querySelectorAll('.vc-card');
+vTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        vTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const filter = tab.dataset.filter;
+        vCards.forEach(card => {
+            if(filter === 'all' || card.dataset.careers.includes(filter)) {
+                card.style.display = 'flex';
+                setTimeout(() => card.style.opacity = '1', 10);
+            } else {
+                card.style.opacity = '0';
+                setTimeout(() => card.style.display = 'none', 300);
+            }
+        });
+    });
+});
+
+// --- CountUp ---
+function countUp(el, target, duration=1500) {
+    const isPercent = target.includes('%');
+    const isPlus = target.includes('+');
+    const num = parseInt(target.replace(/[^0-9]/g, ''));
+    let start = null;
+    const step = (timestamp) => {
+        if (!start) start = timestamp;
+        const progress = Math.min((timestamp - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.floor(eased * num);
+        el.textContent = current.toLocaleString() + (isPlus ? '+' : '') + (isPercent ? '%' : '');
+        if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+}
+
+/* JS_PLACEHOLDER: CANVAS_PHYSICS */
+function initCanvas(canvasId, numDots, speedScale) {
+    const canvas = document.getElementById(canvasId);
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let dots = [];
+    let mouse = { x: -1000, y: -1000 };
+
+    function resize() {
+        const rect = canvas.parentElement.getBoundingClientRect();
+        width = canvas.width = rect.width;
+        height = canvas.height = rect.height;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    for(let i=0; i<numDots; i++) {
+        dots.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            vx: (Math.random() - 0.5) * speedScale,
+            vy: (Math.random() - 0.5) * speedScale,
+            baseVx: (Math.random() - 0.5) * speedScale,
+            baseVy: (Math.random() - 0.5) * speedScale,
+            radius: Math.random() * 2 + 2,
+            isAmber: Math.random() > 0.5,
+            opacity: Math.random() * 0.6 + 0.4
+        });
+    }
+
+    canvas.addEventListener('mousemove', e => { const r = canvas.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
+    canvas.addEventListener('mouseleave', () => { mouse.x = -1000; mouse.y = -1000; });
+    canvas.addEventListener('touchmove', e => { const r = canvas.getBoundingClientRect(); mouse.x = e.touches[0].clientX - r.left; mouse.y = e.touches[0].clientY - r.top; }, {passive:true});
+
+    function draw() {
+        ctx.clearRect(0, 0, width, height);
+        
+        // Update & Draw Dots
+        for(let i=0; i<numDots; i++) {
+            let p = dots[i];
+            
+            // Mouse Interaction (Repel)
+            const dx = p.x - mouse.x;
+            const dy = p.y - mouse.y;
+            const distSq = dx*dx + dy*dy;
+            if(distSq < 22500) { // 150px radius
+                const force = 1000 / (distSq || 1);
+                p.vx += (dx / Math.sqrt(distSq)) * force * 0.05;
+                p.vy += (dy / Math.sqrt(distSq)) * force * 0.05;
+            }
+
+            // Spring back to base velocity
+            p.vx = p.vx * 0.96 + p.baseVx * 0.04;
+            p.vy = p.vy * 0.96 + p.baseVy * 0.04;
+
+            p.x += p.vx;
+            p.y += p.vy;
+
+            if(p.x < 0 || p.x > width) { p.vx *= -1; p.baseVx *= -1; p.x = Math.max(0, Math.min(width, p.x)); }
+            if(p.y < 0 || p.y > height) { p.vy *= -1; p.baseVy *= -1; p.y = Math.max(0, Math.min(height, p.y)); }
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = p.isAmber ? `rgba(240, 165, 0, ${p.opacity})` : `rgba(0, 212, 168, ${p.opacity})`;
+            ctx.fill();
+
+            // Connections to Mouse (Attract lines)
+            if(distSq < 40000) { // 200px radius
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(mouse.x, mouse.y);
+                ctx.strokeStyle = `rgba(240, 165, 0, ${0.3 * (1 - Math.sqrt(distSq)/200)})`;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+        }
+
+        // Connections between dots
+        ctx.lineWidth = 1;
+        for(let i=0; i<numDots; i++) {
+            for(let j=i+1; j<numDots; j++) {
+                const dx = dots[i].x - dots[j].x;
+                const dy = dots[i].y - dots[j].y;
+                const distSq = dx*dx + dy*dy;
+                if(distSq < 14400) { // 120px
+                    ctx.beginPath();
+                    ctx.moveTo(dots[i].x, dots[i].y);
+                    ctx.lineTo(dots[j].x, dots[j].y);
+                    const alpha = 0.12 * (1 - Math.sqrt(distSq)/120);
+                    ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+                    ctx.stroke();
+                }
+            }
+        }
+        requestAnimationFrame(draw);
+    }
+    draw();
+}
+setTimeout(() => {
+    initCanvas('heroCanvas', window.innerWidth < 768 ? 40 : 80, 0.6);
+    initCanvas('ctaCanvas', 40, 0.3);
+}, 500);
+
+/* JS_PLACEHOLDER: TILT_EFFECT */
+function applyTiltEffect(card) {
+    card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width/2;
+        const y = e.clientY - rect.top - rect.height/2;
+        const rotX = -(y / rect.height) * 15;
+        const rotY = (x / rect.width) * 15;
+        card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-8px)`;
+        
+        const shine = card.querySelector('.card-shine');
+        if(shine) {
+            shine.style.background = `radial-gradient(circle at ${e.clientX - rect.left}px ${e.clientY - rect.top}px, rgba(255,255,255,0.06) 0%, transparent 60%)`;
+        }
+    });
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
+        const shine = card.querySelector('.card-shine');
+        if(shine) shine.style.background = 'transparent';
+    });
+}
+document.querySelectorAll('.tilt-card').forEach(applyTiltEffect);
+
+/* JS_PLACEHOLDER: INIT_ANIMATIONS */
+gsap.registerPlugin(ScrollTrigger);
+
+// Hero Sequence
+const heroTl = gsap.timeline({delay: 0.2});
+heroTl.to('#mainNav', { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, 0)
+      .to('#heroEyebrow', { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, 0.1)
+      .to('.split-word', { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out', stagger: 0.05 }, 0.3)
+      .to('.italic-word', { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' }, 0.5)
+      .to('#heroSub', { y: 0, opacity: 1, duration: 0.8, ease: 'power2.out' }, 0.8)
+      .to('#heroCtas button', { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out', stagger: 0.1 }, 1.0)
+      .to('#heroTrust', { opacity: 1, duration: 0.8, ease: 'power2.out' }, 1.2)
+      .to('#heroWavyLine', { strokeDashoffset: 0, duration: 1.2, ease: 'power2.inOut' }, 1.5)
+      .to('#canvasWrapper', { opacity: 1, duration: 1.5, ease: 'power2.inOut' }, 1.0)
+      .to('#scrollInd', { opacity: 1, duration: 1, ease: 'power2.out' }, 1.8);
+
+// Global Section Animators
+gsap.utils.toArray('.section-label').forEach(label => {
+    gsap.fromTo(label, { y: 20, opacity: 0 }, { scrollTrigger: { trigger: label, start: "top 85%" }, y: 0, opacity: 1, duration: 0.8, ease: 'power2.out' });
+});
+gsap.utils.toArray('.sec-headline').forEach(hl => {
+    gsap.fromTo(hl, { y: 40, opacity: 0 }, { scrollTrigger: { trigger: hl, start: "top 85%" }, y: 0, opacity: 1, duration: 0.8, ease: 'power2.out' });
+});
+gsap.utils.toArray('.problem-card').forEach((card, i) => {
+    gsap.to(card, { scrollTrigger: { trigger: '.problem-grid', start: "top 80%" }, y: 0, opacity: 1, duration: 0.8, delay: i*0.12, ease: 'power2.out' });
+});
+
+// Pathway Animation
+ScrollTrigger.create({
+    trigger: ".pathway-sec", start: "top 70%",
+    onEnter: () => {
+        gsap.to('.h-line', { strokeDashoffset: 0, duration: 1.5, ease: 'power2.inOut' });
+        gsap.to('.v-line', { strokeDashoffset: 0, duration: 1.5, ease: 'power2.inOut' });
+        gsap.utils.toArray('.pathway-card').forEach((card, i) => {
+            gsap.to(card, { y: 0, opacity: 1, duration: 0.8, delay: i*0.2 + 0.3, ease: 'power2.out' });
+        });
+        document.querySelectorAll('.count-node').forEach((node, i) => {
+            setTimeout(() => { node.textContent = node.dataset.target; }, (i*200) + 600);
+        });
+    }
+});
+
+// Stats Animation
+ScrollTrigger.create({
+    trigger: ".stats-grid", start: "top 85%",
+    onEnter: () => {
+        gsap.utils.toArray('.stat-item').forEach((stat, i) => {
+            gsap.to(stat, { scale: 1, opacity: 1, duration: 0.8, delay: i*0.1, ease: 'back.out(1.5)' });
+        });
+        document.querySelectorAll('.stat-num').forEach(num => countUp(num, num.dataset.val, 1500));
+    }
+});
+gsap.to('.quote-block', { scrollTrigger: { trigger: '.quote-block', start: "top 80%" }, x: 0, opacity: 1, duration: 0.8, ease: 'power2.out' });
+
+// Tiers
+gsap.utils.toArray('.tier-card').forEach((card, i) => {
+    gsap.to(card, { scrollTrigger: { trigger: '.tiers-wrap', start: "top 80%" }, y: 0, opacity: 1, duration: 0.8, delay: i*0.2, ease: 'power2.out' });
+});
+gsap.to('.tier-conn', { scrollTrigger: { trigger: '.tiers-wrap', start: "top 80%" }, opacity: 1, duration: 0.6, delay: 0.5, ease: 'power2.out' });
+gsap.to('.reassurance', { scrollTrigger: { trigger: '.reassurance', start: "top 90%" }, y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' });
+
+// CTA Anim
+gsap.utils.toArray('.cta-line').forEach((line, i) => {
+    gsap.to(line, { scrollTrigger: { trigger: '.cta-sec', start: "top 70%" }, y: 0, opacity: 1, duration: 0.8, delay: i*0.15, ease: 'power2.out' });
+});
+gsap.to('.cta-sub', { scrollTrigger: { trigger: '.cta-sec', start: "top 60%" }, opacity: 1, duration: 0.8, delay: 0.6, ease: 'power2.out' });
+gsap.to('.cta-buttons', { scrollTrigger: { trigger: '.cta-sec', start: "top 60%" }, y: 0, opacity: 1, duration: 0.8, delay: 0.8, ease: 'power2.out' });
+gsap.to('.cta-canvas-wrapper', { scrollTrigger: { trigger: '.cta-sec', start: "top 60%" }, opacity: 1, duration: 1.5, ease: 'power2.out' });
+/* --- CHAT LOGIC --- */
+const cwBody = document.getElementById('cwBody');
+const cwInput = document.getElementById('cwInput');
+const cwSend = document.getElementById('cwSend');
+const cwCount = document.getElementById('cwCount');
+const cwFill = document.getElementById('cwFill');
+const cwUnlockMsg = document.getElementById('cwUnlockMsg');
+const cwInputArea = document.getElementById('cwInputArea');
+const careerWrap = document.getElementById('careerWrap');
+const careerGrid = document.getElementById('careerGrid');
+
+let questionCount = 0;
+let conversationHistory = [];
+const systemPrompt = `You are Pathfinder, a warm but direct AI career guide for high school students. 
+Run a 5-question conversational intake. Ask ONE question at a time. 
+Do NOT ask generic questions like "what are your hobbies" or "what subjects do you like". 
+Ask ONLY situational, scenario-based questions that reveal thinking style. 
+Examples: "A group project is falling apart the night before it's due. Walk me through exactly what you do." or "You have to learn something completely new in 48 hours. What's your strategy?" 
+After exactly 5 user responses, output a CAREER REALITY MATRIX formatted exactly like this:
+═══ YOUR CAREER REALITY MATRIX ═══
+[Career Path 1 Name]
+Why you fit: [2 specific sentences referencing what the student said]
+Reality: [1 sentence about what this job actually involves day-to-day]
+
+[Career Path 2 Name]
+Why you fit: [2 sentences]
+Reality: [1 sentence]
+
+[Career Path 3 Name]  
+Why you fit: [2 sentences]
+Reality: [1 sentence]
+═══════════════════════════════════
+End with: "Tap a career below to unlock your Reality Vault clips."
+Never break character. Never say you are an AI. Speak like a sharp, encouraging mentor who respects the student's intelligence.`;
+
+function addMessage(type, text) {
+    const msgDef = type === 'bot' ? 
+        `<div class="cw-avatar">PF</div><div class="msg-bubble">${text}</div>` : 
+        `<div class="msg-bubble">${text}</div>`;
+    const div = document.createElement('div');
+    div.className = `msg-row msg-${type}`;
+    div.innerHTML = `<div class="msg-content">${msgDef}</div>`;
+    cwBody.appendChild(div);
+    cwBody.scrollTop = cwBody.scrollHeight;
+}
+
+function addTyping() {
+    const div = document.createElement('div');
+    div.className = 'msg-row msg-bot typing-indicator-row';
+    div.innerHTML = `<div class="msg-content"><div class="cw-avatar">PF</div><div class="msg-bubble typing-dots"><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div></div></div>`;
+    cwBody.appendChild(div);
+    cwBody.scrollTop = cwBody.scrollHeight;
+    return div;
+}
+
+async function fetchResponse(text) {
+    if(text) {
+        addMessage('user', text);
+        conversationHistory.push({ role: 'user', parts: [{text}]});
+        if(questionCount > 0) questionCount++;
+    } else {
+        conversationHistory.push({ role: 'user', parts: [{text: systemPrompt}]});
+    }
+
+    if(questionCount > 0 && questionCount <= 5) {
+        cwCount.textContent = `Question ${questionCount} of 5`;
+        cwFill.style.width = `${(questionCount/5)*100}%`;
+    }
+
+    const typing = addTyping();
+    cwSend.disabled = true;
+    cwInput.disabled = true;
+
+    try {
+        const payload = { contents: conversationHistory };
+        const res = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        typing.remove();
+        
+        const botText = data.candidates[0].content.parts[0].text;
+        addMessage('bot', botText);
+        conversationHistory.push({ role: 'model', parts: [{text: botText}] });
+        
+        if (questionCount >= 5 && botText.includes('CAREER REALITY MATRIX')) {
+            unlockVault(botText);
+        } else {
+            cwSend.disabled = false;
+            cwInput.disabled = false;
+            cwInput.focus();
+        }
+    } catch(err) {
+        typing.remove();
+        addMessage('bot', '<i style="color:var(--teal)">Pathfinder is having a moment. Try again?</i>');
+        cwSend.disabled = false;
+        cwInput.disabled = false;
+    }
+}
+
+cwInput.addEventListener('keypress', (e) => {
+    if(e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        if(cwInput.value.trim() !== '') {
+            fetchResponse(cwInput.value.trim());
+            cwInput.value = '';
+        }
+    }
+});
+cwSend.addEventListener('click', () => {
+    if(cwInput.value.trim() !== '') {
+        fetchResponse(cwInput.value.trim());
+        cwInput.value = '';
+    }
+});
+cwInput.addEventListener('input', () => cwSend.disabled = cwInput.value.trim() === '');
+
+let chatInitiated = false;
+ScrollTrigger.create({
+    trigger: "#discovery-chat", start: "top 60%",
+    onEnter: () => {
+        if(!chatInitiated) {
+            chatInitiated = true;
+            addMessage('bot', "Hey &mdash; I'm Pathfinder. I'm not going to ask you what your favourite subject is. Instead, I want to see how you actually think. Ready? Here's your first scenario:");
+            questionCount = 1;
+            fetchResponse(''); // Send system prompt
+        }
+    }
+});
+
+function unlockVault(matrixText) {
+    cwInputArea.style.display = 'none';
+    cwUnlockMsg.style.display = 'block';
+    
+    // Parse careers between [ ]
+    let careers = [];
+    const regex = /\[(.*?)\]/g;
+    let match;
+    while ((match = regex.exec(matrixText)) !== null) {
+        careers.push(match[1]);
+    }
+    
+    if(careers.length > 0) {
+        careerWrap.style.display = 'block';
+        careers.slice(0,3).forEach(career => {
+            const div = document.createElement('div');
+            div.className = 'c-card';
+            div.onclick = () => {
+                document.getElementById('vault-section').scrollIntoView();
+                document.querySelector('.v-tab[data-filter="all"]').click();
+            };
+            div.innerHTML = `
+                <h4 class="c-card-title">${career}</h4>
+                <p class="c-card-sub">Tap to hear from professionals in this field</p>
+                <div class="c-card-btn">&#9654; Open Vault</div>
+            `;
+            careerGrid.appendChild(div);
+        });
+        gsap.fromTo('.c-card', {y: 40, opacity: 0}, {y: 0, opacity: 1, stagger: 0.15, duration: 0.6, ease: 'power2.out'});
+    }
+    
+    document.querySelectorAll('.vc-card.locked').forEach(card => {
+        card.classList.remove('locked');
+        card.querySelector('.vc-locked').style.display = 'none';
+        const q = card.querySelector('.vc-q').textContent;
+        const name = card.querySelector('.vc-name').textContent;
+        const role = card.querySelector('.vc-role').textContent.split(' ')[0];
+        const exp = card.querySelector('.vc-exp').textContent;
+        card.querySelector('.vc-play').outerHTML = `<button class="vc-play" onclick="openAudioModal('${name}', '${role}', '${exp}', '${q.replace(/'/g, "\\'")}')">&#9654; Play Clip</button>`;
+    });
+}
+
+/* --- AUDIO SYNTHESIS --- */
+const amWrap = document.getElementById('audioModalWrap');
+const amText = document.getElementById('amText');
+const amTitle = document.getElementById('amTitle');
+const amProfInfo = document.getElementById('amProfInfo');
+const amPlayBtn = document.getElementById('amPlayBtn');
+const amPlayIcon = document.getElementById('amPlayIcon');
+const amFill = document.getElementById('amFill');
+const amTime = document.getElementById('amTime');
+const amBars = document.querySelectorAll('.am-bar');
+
+let currentUtterance = null;
+let currentAudioText = "";
+let isPlaying = false;
+let progressInterval = null;
+let estimatedDuration = 180;
+
+function closeAudioModal() {
+    amWrap.classList.remove('open');
+    if(window.speechSynthesis) window.speechSynthesis.cancel();
+    isPlaying = false;
+    clearInterval(progressInterval);
+    document.body.style.overflow = '';
+}
+
+async function openAudioModal(name, role, exp, question) {
+    amWrap.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    
+    amProfInfo.innerHTML = `
+        <div class="vc-avatar">${name.split(' ').map(n=>n[0]).join('')}</div>
+        <div>
+            <div class="vc-name">${name}</div>
+            <div class="vc-role">${role} <span class="vc-exp">${exp}</span></div>
+        </div>
+    `;
+    amTitle.textContent = `Day in the Life of a ${role}`;
+    amText.textContent = "Generating response...";
+    amFill.style.width = '0%';
+    amTime.textContent = '0:00 / 0:00';
+    isPlaying = false;
+    amPlayBtn.classList.remove('playing');
+    amPlayIcon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"/>';
+    amBars.forEach(b => b.classList.remove('animated'));
+
+    const prompt = `You are ${name}, a ${role} with ${exp} experience. Answer this question in a completely natural, first-person spoken style — like you're talking to a 17-year-old at a coffee shop. Be honest, specific, and real. Include small details. Question: '${question}'. Also include a 'Day in the Life' segment: describe one specific typical workday, hour by hour, from morning to end of day. Keep total response under 300 words. Start speaking immediately — no intro like 'Sure!' or 'Great question'.`;
+
+    try {
+        const payload = { contents: [{ role: 'user', parts: [{text: prompt}]}] };
+        const res = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        currentAudioText = data.candidates[0].content.parts[0].text;
+        amText.textContent = currentAudioText;
+        estimatedDuration = (currentAudioText.split(' ').length / 150) * 60; // 150 wpm
+        amTime.textContent = `0:00 / ${formatTime(estimatedDuration)}`;
+        
+        toggleAudio();
+
+    } catch(err) {
+        amText.textContent = "Audio generation failed. Please try again.";
+    }
+}
+
+function formatTime(seconds) {
+    const m = Math.floor(seconds / 60);
+    const s = Math.floor(seconds % 60);
+    return `${m}:${s < 10 ? '0' : ''}${s}`;
+}
+
+function toggleAudio() {
+    if(!currentAudioText) return;
+    
+    if(isPlaying) {
+        window.speechSynthesis.pause();
+        isPlaying = false;
+        amPlayBtn.classList.remove('playing');
+        amPlayIcon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"/>';
+        amBars.forEach(b => b.classList.remove('animated'));
+        clearInterval(progressInterval);
+    } else {
+        if(window.speechSynthesis.paused) {
+            window.speechSynthesis.resume();
+        } else {
+            window.speechSynthesis.cancel();
+            currentUtterance = new SpeechSynthesisUtterance(currentAudioText);
+            const voices = window.speechSynthesis.getVoices();
+            if(voices.length > 0) currentUtterance.voice = voices[0];
+            currentUtterance.rate = 1.0;
+            currentUtterance.onend = () => {
+                isPlaying = false;
+                amPlayBtn.classList.remove('playing');
+                amPlayIcon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"/>';
+                amBars.forEach(b => b.classList.remove('animated'));
+                clearInterval(progressInterval);
+            };
+            window.speechSynthesis.speak(currentUtterance);
+        }
+        isPlaying = true;
+        amPlayBtn.classList.add('playing');
+        amPlayIcon.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+        amBars.forEach(b => b.classList.add('animated'));
+        
+        let elapsed = 0;
+        clearInterval(progressInterval);
+        progressInterval = setInterval(() => {
+            elapsed += 0.1;
+            const progress = Math.min((elapsed / estimatedDuration) * 100, 100);
+            amFill.style.width = `${progress}%`;
+            amTime.textContent = `${formatTime(elapsed)} / ${formatTime(estimatedDuration)}`;
+        }, 100);
+    }
+}
+    </script>
+</body>
+</html>
