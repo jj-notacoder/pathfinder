@@ -4,7 +4,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MENTORS } from '@/lib/mockData';
+import { MENTORS, VAULT_FIELDS } from '@/lib/mockData';
 import { useCareerContext } from '@/context/CareerContext';
 import { useRouter } from 'next/navigation';
 import { MentorCard } from '@/components/ui/MentorCard';
@@ -16,7 +16,7 @@ export default function MentorsPage() {
   const [activeTab, setActiveTab] = useState<'nearPeers' | 'professionals'>('nearPeers');
   const [activeFilter, setActiveFilter] = useState('All');
 
-  const filters = ['All', 'Technology', 'Engineering', 'Medicine', 'Law', 'Design', 'Finance'];
+
 
   const baseData = MENTORS[activeTab];
   const filteredData = activeFilter === 'All' 
@@ -40,7 +40,7 @@ export default function MentorsPage() {
         {/* Tabs */}
         <div className="flex gap-8 border-b border-border/50 mb-8 relative overflow-x-auto scrollbar-none">
           <button 
-            onClick={() => { setActiveTab('nearPeers'); setActiveFilter('All'); }}
+            onClick={() => setActiveTab('nearPeers')}
             className={`pb-4 font-display font-bold text-xl transition-colors relative whitespace-nowrap ${activeTab === 'nearPeers' ? 'text-white' : 'text-muted hover:text-white'}`}
           >
             Near-Peers (Students & Alumni)
@@ -50,7 +50,7 @@ export default function MentorsPage() {
           </button>
           
           <button 
-            onClick={() => { setActiveTab('professionals'); setActiveFilter('All'); }}
+            onClick={() => setActiveTab('professionals')}
             className={`pb-4 font-display font-bold text-xl transition-colors relative whitespace-nowrap ${activeTab === 'professionals' ? 'text-white' : 'text-muted hover:text-white'}`}
           >
             Industry Professionals
@@ -62,7 +62,7 @@ export default function MentorsPage() {
 
         {/* Filters */}
         <div className="flex flex-wrap gap-3 mb-12">
-          {filters.map(filter => (
+          {VAULT_FIELDS.map((filter: string) => (
             <button
               key={filter}
               onClick={() => setActiveFilter(filter)}

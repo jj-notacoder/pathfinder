@@ -1,7 +1,7 @@
 import { 
   Cpu, Wrench, HeartPulse, Scale, Palette, LineChart, FlaskConical, Database, BookOpen, 
   PenTool, Mic, Briefcase, Brain, Leaf, Shield, Gamepad2, Rocket, Microscope, Megaphone,
-  Globe, GraduationCap
+  Globe, GraduationCap, Lightbulb
 } from 'lucide-react';
 import React from 'react';
 
@@ -27,6 +27,7 @@ export function getFieldIcon(field: string, className: string = "w-4 h-4 inline-
     case 'Aerospace': return <Rocket {...props} />;
     case 'Biotech': return <Microscope {...props} />;
     case 'Marketing': return <Megaphone {...props} />;
+    case 'Product Management': return <Lightbulb {...props} />;
     default: return <Globe {...props} />;
   }
 }

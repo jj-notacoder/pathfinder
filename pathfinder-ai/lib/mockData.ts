@@ -156,108 +156,108 @@ export const MENTORS = {
   nearPeers: [
     {
       id: "np1", initials: "JK", name: "Jason Kim", university: "Stanford University", major: "Computer Science", year: "Class of 2024",
-      field: "Technology", sessions: 42, rating: "4.9", available: true,
+      field: "Technology", fieldSlug: "technology", sessions: 42, rating: "4.9", available: true,
       bio: "Just survived the CS recruiting grind. Happy to share my exact LeetCode strategy and how I landed a FAANG offer.",
       topics: ["Internships", "Leetcode", "Tech Culture", "Resume Reviews"]
     },
     {
       id: "np2", initials: "AA", name: "Aisha Ali", university: "Johns Hopkins University", major: "Pre-Med / Biology", year: "Junior",
-      field: "Medicine", sessions: 28, rating: "5.0", available: true,
+      field: "Medicine", fieldSlug: "medicine", sessions: 28, rating: "5.0", available: true,
       bio: "Balancing clinical hours, MCAT prep, and labs. I can tell you exactly what it takes to survive organic chemistry without losing your mind.",
       topics: ["MCAT Prep", "Clinical Hours", "Burnout", "Lab Work"]
     },
     {
       id: "np3", initials: "RJ", name: "Ryan Jensen", university: "Georgetown University", major: "Pre-Law / PoliSci", year: "Senior",
-      field: "Law", sessions: 15, rating: "4.8", available: false,
+      field: "Law", fieldSlug: "law", sessions: 15, rating: "4.8", available: false,
       bio: "Taking the LSAT next month. I can pass on exactly what admissions officers have told me they actually look for.",
       topics: ["LSAT", "Mock Trial", "Writing Samples", "Internships"]
     },
     {
       id: "np4", initials: "LC", name: "Luna Chang", university: "RISD", major: "Interaction Design", year: "Sophomore",
-      field: "Design", sessions: 56, rating: "4.9", available: true,
+      field: "Design", fieldSlug: "design", sessions: 56, rating: "4.9", available: true,
       bio: "Transitioned from traditional illustration to UI/UX. Let's talk about building a portfolio that tech companies actually want to see.",
       topics: ["Portfolio", "Figma", "Design Critiques", "Internships"]
     },
     {
       id: "np5", initials: "MW", name: "Michael Wright", university: "MIT", major: "Aerospace Engineering", year: "Senior",
-      field: "Engineering", sessions: 33, rating: "5.0", available: true,
+      field: "Engineering", fieldSlug: "engineering", sessions: 33, rating: "5.0", available: true,
       bio: "Led the Rocket Team last year. Can explain the difference between what you learn in physics class and what you actually do in the lab.",
       topics: ["Fluid Dynamics", "Clubs & Teams", "Internships", "Math Grinds"]
     },
     {
       id: "np6", initials: "ST", name: "Sarah Thompson", university: "Wharton (UPenn)", major: "Finance", year: "Junior",
-      field: "Finance", sessions: 19, rating: "4.7", available: true,
+      field: "Finance", fieldSlug: "finance", sessions: 19, rating: "4.7", available: true,
       bio: "Secured a summer analyst role at a bulge bracket. I'll walk you through the technical interview prep and the culture of finance clubs.",
       topics: ["Recruiting", "Networking", "Valuation Models", "Finance Clubs"]
     },
     // --- EXPANDED NEAR-PEERS SET (14 fields) ---
-    { id: "np7", initials: "EL", name: "Elara Vance", university: "Caltech", major: "Physics", year: "Senior", field: "Science", sessions: 22, rating: "4.9", available: true, bio: "Navigating the transition from theoretical physics to applied research. Let's discuss lab placements.", topics: ["Lab Work", "Grad School Prep", "Research Grants", "Publishing"] },
-    { id: "np8", initials: "DK", name: "Devon King", university: "Carnegie Mellon", major: "Machine Learning", year: "Masters", field: "Data & AI", sessions: 45, rating: "5.0", available: true, bio: "Just finished a deep learning research internship. Can help you structure your ML portoflio.", topics: ["PyTorch", "AI Ethics", "Internships", "Data Pipelines"] },
-    { id: "np9", initials: "MJ", name: "Maya Jones", university: "Vanderbilt", major: "Secondary Ed", year: "Testing", field: "Education", sessions: 18, rating: "4.8", available: false, bio: "Currently student-teaching high school history. Let's talk about classroom management vs theory.", topics: ["Certification", "Lesson Planning", "Student Teaching", "Burnout"] },
-    { id: "np10", initials: "TC", name: "Tomas Cruz", university: "Cornell AAP", major: "Architecture", year: "Fifth Year", field: "Architecture", sessions: 39, rating: "4.9", available: true, bio: "Survived four years of studio all-nighters. I can review your portfolio and talk firm internships.", topics: ["Studio Culture", "Rhino 3D", "Portfolios", "Firm Culture"] },
-    { id: "np11", initials: "SJ", name: "Sarah Jenkins", university: "Northwestern Medill", major: "Journalism", year: "Junior", field: "Media & Journalism", sessions: 26, rating: "4.7", available: true, bio: "Editor at the campus paper. I'll show you how to pitch editors and build a clip portfolio.", topics: ["Pitching", "Multimedia", "Ethics", "Internships"] },
-    { id: "np12", initials: "RP", name: "Ryan Patel", university: "Babson College", major: "Entrepreneurship", year: "Senior", field: "Entrepreneurship", sessions: 31, rating: "4.9", available: true, bio: "Bootstrapped my own startup to 10k MRR. Let's skip the buzzwords and talk actual customer acquisition.", topics: ["Pitch Decks", "Bootstrapping", "Finding Co-founders", "Grants"] },
-    { id: "np13", initials: "LG", name: "Lily Garcia", university: "UCLA", major: "Psychology", year: "Senior", field: "Psychology", sessions: 42, rating: "5.0", available: true, bio: "Prepping for clinical psych PhD apps. I can explain the difference between PsyD, PhD, and LCSW tracks.", topics: ["Grad Apps", "Research Methods", "Clinical Hours", "Therapy Tracks"] },
-    { id: "np14", initials: "OW", name: "Oliver Wood", university: "UC Berkeley", major: "Env Science", year: "Junior", field: "Environmental", sessions: 15, rating: "4.8", available: false, bio: "Working on climate data modeling. Let's discuss navigating eco-anxiety and finding impactful internships.", topics: ["Field Work", "Policy", "GIS Mapping", "Sustainability"] },
-    { id: "np15", initials: "AN", name: "Aisha Nassar", university: "Georgia Tech", major: "Cybersecurity", year: "Senior", field: "Cybersecurity", sessions: 51, rating: "4.9", available: true, bio: "CTF team captain. I'll tell you how to break into infosec without spending thousands on certs.", topics: ["CTFs", "CompTIA", "Pen Testing", "Security Clearances"] },
-    { id: "np16", initials: "JB", name: "Jack Brooks", university: "USC Games", major: "Interactive Media", year: "Junior", field: "Gaming", sessions: 29, rating: "4.8", available: true, bio: "Level designer for a student indie project. Let's talk about the crunch culture and building game engines.", topics: ["Unity/Unreal", "Game Jams", "Portfolio Docs", "Crunch"] },
-    { id: "np17", initials: "EK", name: "Elena Kosh", university: "Purdue", major: "Aerospace", year: "Senior", field: "Aerospace", sessions: 34, rating: "5.0", available: true, bio: "Interned at Blue Origin. Happy to discuss orbital mechanics vs atmospheric flight tracks.", topics: ["CAD", "Avionics", "Internships", "Secret Clearances"] },
-    { id: "np18", initials: "MN", name: "Miles Newton", university: "UCSD", major: "Bioengineering", year: "Masters", field: "Biotech", sessions: 21, rating: "4.9", available: false, bio: "Working with CRISPR delivery systems. I can help navigate the jump from undergrad to biotech industry.", topics: ["Wet Lab", "Bioinformatics", "Startup Culture", "Academia vs Industry"] },
-    { id: "np19", initials: "CH", name: "Chloe Huang", university: "NYU Stern", major: "Marketing", year: "Senior", field: "Marketing", sessions: 44, rating: "4.7", available: true, bio: "Secured a brand management internship at P&G. Let's talk about the difference between sales and marketing.", topics: ["Brand Strategy", "Agencies", "Case Interviews", "SEO"] },
-    { id: "np20", initials: "TR", name: "Tyler Reed", university: "UT Austin", major: "MIS", year: "Junior", field: "Product Management", sessions: 55, rating: "4.9", available: true, bio: "Just landed an APM role. I'll walk you through wireframing, SQL, and the product sense interview.", topics: ["APM Programs", "Agile", "User Stories", "Roadmapping"] }
+    { id: "np7", initials: "EL", name: "Elara Vance", university: "Caltech", major: "Physics", year: "Senior", field: "Science", fieldSlug: "science", sessions: 22, rating: "4.9", available: true, bio: "Navigating the transition from theoretical physics to applied research. Let's discuss lab placements.", topics: ["Lab Work", "Grad School Prep", "Research Grants", "Publishing"] },
+    { id: "np8", initials: "DK", name: "Devon King", university: "Carnegie Mellon", major: "Machine Learning", year: "Masters", field: "Data & AI", fieldSlug: "data-ai", sessions: 45, rating: "5.0", available: true, bio: "Just finished a deep learning research internship. Can help you structure your ML portoflio.", topics: ["PyTorch", "AI Ethics", "Internships", "Data Pipelines"] },
+    { id: "np9", initials: "MJ", name: "Maya Jones", university: "Vanderbilt", major: "Secondary Ed", year: "Testing", field: "Education", fieldSlug: "education", sessions: 18, rating: "4.8", available: false, bio: "Currently student-teaching high school history. Let's talk about classroom management vs theory.", topics: ["Certification", "Lesson Planning", "Student Teaching", "Burnout"] },
+    { id: "np10", initials: "TC", name: "Tomas Cruz", university: "Cornell AAP", major: "Architecture", year: "Fifth Year", field: "Architecture", fieldSlug: "architecture", sessions: 39, rating: "4.9", available: true, bio: "Survived four years of studio all-nighters. I can review your portfolio and talk firm internships.", topics: ["Studio Culture", "Rhino 3D", "Portfolios", "Firm Culture"] },
+    { id: "np11", initials: "SJ", name: "Sarah Jenkins", university: "Northwestern Medill", major: "Journalism", year: "Junior", field: "Media & Journalism", fieldSlug: "media-journalism", sessions: 26, rating: "4.7", available: true, bio: "Editor at the campus paper. I'll show you how to pitch editors and build a clip portfolio.", topics: ["Pitching", "Multimedia", "Ethics", "Internships"] },
+    { id: "np12", initials: "RP", name: "Ryan Patel", university: "Babson College", major: "Entrepreneurship", year: "Senior", field: "Entrepreneurship", fieldSlug: "entrepreneurship", sessions: 31, rating: "4.9", available: true, bio: "Bootstrapped my own startup to 10k MRR. Let's skip the buzzwords and talk actual customer acquisition.", topics: ["Pitch Decks", "Bootstrapping", "Finding Co-founders", "Grants"] },
+    { id: "np13", initials: "LG", name: "Lily Garcia", university: "UCLA", major: "Psychology", year: "Senior", field: "Psychology", fieldSlug: "psychology", sessions: 42, rating: "5.0", available: true, bio: "Prepping for clinical psych PhD apps. I can explain the difference between PsyD, PhD, and LCSW tracks.", topics: ["Grad Apps", "Research Methods", "Clinical Hours", "Therapy Tracks"] },
+    { id: "np14", initials: "OW", name: "Oliver Wood", university: "UC Berkeley", major: "Env Science", year: "Junior", field: "Environmental", fieldSlug: "environmental", sessions: 15, rating: "4.8", available: false, bio: "Working on climate data modeling. Let's discuss navigating eco-anxiety and finding impactful internships.", topics: ["Field Work", "Policy", "GIS Mapping", "Sustainability"] },
+    { id: "np15", initials: "AN", name: "Aisha Nassar", university: "Georgia Tech", major: "Cybersecurity", year: "Senior", field: "Cybersecurity", fieldSlug: "cybersecurity", sessions: 51, rating: "4.9", available: true, bio: "CTF team captain. I'll tell you how to break into infosec without spending thousands on certs.", topics: ["CTFs", "CompTIA", "Pen Testing", "Security Clearances"] },
+    { id: "np16", initials: "JB", name: "Jack Brooks", university: "USC Games", major: "Interactive Media", year: "Junior", field: "Gaming", fieldSlug: "gaming", sessions: 29, rating: "4.8", available: true, bio: "Level designer for a student indie project. Let's talk about the crunch culture and building game engines.", topics: ["Unity/Unreal", "Game Jams", "Portfolio Docs", "Crunch"] },
+    { id: "np17", initials: "EK", name: "Elena Kosh", university: "Purdue", major: "Aerospace", year: "Senior", field: "Aerospace", fieldSlug: "aerospace", sessions: 34, rating: "5.0", available: true, bio: "Interned at Blue Origin. Happy to discuss orbital mechanics vs atmospheric flight tracks.", topics: ["CAD", "Avionics", "Internships", "Secret Clearances"] },
+    { id: "np18", initials: "MN", name: "Miles Newton", university: "UCSD", major: "Bioengineering", year: "Masters", field: "Biotech", fieldSlug: "biotech", sessions: 21, rating: "4.9", available: false, bio: "Working with CRISPR delivery systems. I can help navigate the jump from undergrad to biotech industry.", topics: ["Wet Lab", "Bioinformatics", "Startup Culture", "Academia vs Industry"] },
+    { id: "np19", initials: "CH", name: "Chloe Huang", university: "NYU Stern", major: "Marketing", year: "Senior", field: "Marketing", fieldSlug: "marketing", sessions: 44, rating: "4.7", available: true, bio: "Secured a brand management internship at P&G. Let's talk about the difference between sales and marketing.", topics: ["Brand Strategy", "Agencies", "Case Interviews", "SEO"] },
+    { id: "np20", initials: "TR", name: "Tyler Reed", university: "UT Austin", major: "MIS", year: "Junior", field: "Product Management", fieldSlug: "product-management", sessions: 55, rating: "4.9", available: true, bio: "Just landed an APM role. I'll walk you through wireframing, SQL, and the product sense interview.", topics: ["APM Programs", "Agile", "User Stories", "Roadmapping"] }
   ],
   professionals: [
     {
       id: "pro1", initials: "DK", name: "David Kim", company: "Google", title: "Senior Engineer", exp: "8 Years",
-      field: "Technology", sessions: 120, rating: "4.9", available: true,
+      field: "Technology", fieldSlug: "technology", sessions: 120, rating: "4.9", available: true,
       bio: "I interview junior devs weekly. I'll tell you the specific red flags that get resumes thrown out immediately.",
       topics: ["Hiring realities", "System Design", "Tech Lead Roles", "Salary Negotations"]
     },
     {
       id: "pro2", initials: "EH", name: "Dr. Elena Hayes", company: "Mount Sinai Hospital", title: "Attending Surgeon", exp: "14 Years",
-      field: "Medicine", sessions: 85, rating: "5.0", available: false,
+      field: "Medicine", fieldSlug: "medicine", sessions: 85, rating: "5.0", available: false,
       bio: "I've overseen hundreds of residents. I'll give you the unfiltered truth about the toll medicine takes on your 20s.",
       topics: ["Residency Match", "Surgical Reality", "Work-life Balance", "Specialty Choice"]
     },
     {
       id: "pro3", initials: "MR", name: "Michael Ross", company: "Skadden Arps", title: "M&A Partner", exp: "20 Years",
-      field: "Law", sessions: 42, rating: "4.8", available: true,
+      field: "Law", fieldSlug: "law", sessions: 42, rating: "4.8", available: true,
       bio: "Big Law is not for everyone. Let's discuss if you are actually cut out for the 100-hour work weeks and partner track.",
       topics: ["Big Law Culture", "Billable Hours", "Partner Track", "Client Relations"]
     },
     {
       id: "pro4", initials: "SV", name: "Sonia Varma", company: "Airbnb", title: "Design Director", exp: "11 Years",
-      field: "Design", sessions: 200, rating: "4.9", available: true,
+      field: "Design", fieldSlug: "design", sessions: 200, rating: "4.9", available: true,
       bio: "Your portfolio is probably too pretty. I'll show you how to structure case studies that prove you can actually solve business constraints.",
       topics: ["Case Studies", "Design Leadership", "Cross-functional Dynamics", "Hiring"]
     },
     {
       id: "pro5", initials: "BR", name: "Ben Roberts", company: "SpaceX", title: "Propulsion Lead", exp: "9 Years",
-      field: "Engineering", sessions: 76, rating: "5.0", available: true,
+      field: "Engineering", fieldSlug: "engineering", sessions: 76, rating: "5.0", available: true,
       bio: "The pace here is insane. Let's evaluate if you prefer the slow, methodical pace of legacy defense or the wild west of new space.",
       topics: ["New Space vs Legacy", "Rapid Prototyping", "Burnout", "Masters vs BS"]
     },
     {
       id: "pro6", initials: "AL", name: "Amanda Lewis", company: "Goldman Sachs", title: "Vice President", exp: "12 Years",
-      field: "Finance", sessions: 95, rating: "4.8", available: true,
+      field: "Finance", fieldSlug: "finance", sessions: 95, rating: "4.8", available: true,
       bio: "I survived the analyst grind. I can break down exactly what PE, IB, and HF paths actually look like day-to-day.",
       topics: ["Exit Opportunities", "IB Lifestyle", "Private Equity", "Women in Finance"]
     },
     // --- EXPANDED INDUSTRY EXPERTS SET (14 fields) ---
-    { id: "pro7", initials: "VK", name: "Dr. Victor Kline", company: "CERN", title: "Lead Physicist", exp: "15 Years", field: "Science", sessions: 78, rating: "5.0", available: true, bio: "Managing multi-national particle experiments. Let's evaluate if a life in academia is actually for you.", topics: ["Grant Writing", "Post-doc Reality", "Industry vs Academia", "Publishing"] },
-    { id: "pro8", initials: "SS", name: "Samantha Sun", company: "OpenAI", title: "Research Scientist", exp: "9 Years", field: "Data & AI", sessions: 210, rating: "4.9", available: false, bio: "Training LLMs at scale. I'll give you the unfiltered truth about the current AI hype cycle.", topics: ["Model Training", "Compute Scaling", "Research Scientist Path", "Ethics"] },
-    { id: "pro9", initials: "MB", name: "Marcus Bell", company: "Chicago Public Schools", title: "Principal", exp: "18 Years", field: "Education", sessions: 45, rating: "4.8", available: true, bio: "Taught for 12 years before administration. Let's discuss the systemic challenges vs individual impact.", topics: ["Admin Track", "Policy", "Teacher Retention", "Title I Schools"] },
-    { id: "pro10", initials: "AL", name: "Anna Larson", company: "Gensler", title: "Senior Architect", exp: "14 Years", field: "Architecture", sessions: 92, rating: "4.9", available: true, bio: "Leading commercial high-rise projects. I'll tell you how much of the job is design vs managing contractors.", topics: ["Licensure", "Client Relations", "BIM", "Urban Planning"] },
-    { id: "pro11", initials: "JT", name: "James Tucker", company: "The Atlantic", title: "Senior Staff Writer", exp: "12 Years", field: "Media & Journalism", sessions: 67, rating: "4.8", available: true, bio: "Surviving the changing media landscape. Happy to discuss the reality of freelancing vs staff jobs.", topics: ["Editorial Process", "Finding Sources", "Media Consolidation", "Substack"] },
-    { id: "pro12", initials: "NC", name: "Nadia Chen", company: "Sequoia Capital", title: "Partner", exp: "11 Years", field: "Entrepreneurship", sessions: 130, rating: "5.0", available: true, bio: "Former founder turned VC. I'll tell you the exact traits we look for before writing a seed check.", topics: ["Term Sheets", "Product-Market Fit", "Fundraising", "Pivoting"] },
-    { id: "pro13", initials: "DR", name: "Dr. David Rossi", company: "Private Practice", title: "Clinical Psychologist", exp: "20 Years", field: "Psychology", sessions: 88, rating: "4.9", available: false, bio: "Running a successful private practice. Let's talk about the emotional toll of carrying client trauma.", topics: ["Private Practice", "Insurance Billing", "Burnout", "Specialties"] },
-    { id: "pro14", initials: "EM", name: "Eva Martinez", company: "EPA", title: "Policy Director", exp: "16 Years", field: "Environmental", sessions: 54, rating: "4.8", available: true, bio: "Drafting federal water regulations. I can break down the slow grind of creating actual environmental change.", topics: ["Lobbying", "Federal Agencies", "Compliance", "NEPA"] },
-    { id: "pro15", initials: "AK", name: "Alex Kincaid", company: "CrowdStrike", title: "Threat Intel Lead", exp: "10 Years", field: "Cybersecurity", sessions: 115, rating: "5.0", available: true, bio: "Tracking state-sponsored APTs. Let's discuss the stress of being the last line of defense during a breach.", topics: ["Incident Response", "Malware Analysis", "Red Teaming", "On-Call Stress"] },
-    { id: "pro16", initials: "SW", name: "Sarah Winters", company: "Epic Games", title: "Lead Level Designer", exp: "13 Years", field: "Gaming", sessions: 82, rating: "4.9", available: true, bio: "Shipped three AAA titles. I'll give you the reality check on game dev salaries and stability.", topics: ["AAA vs Indie", "Game Engines", "Production Schedules", "Contract Work"] },
-    { id: "pro17", initials: "HC", name: "Henry Cole", company: "NASA JPL", title: "Flight Director", exp: "18 Years", field: "Aerospace", sessions: 140, rating: "5.0", available: true, bio: "Orchestrating Mars rover operations. Let's talk about making split-second decisions with a 14-minute delay.", topics: ["Mission Control", "Systems Eng", "Government vs Private", "Failure Analysis"] },
-    { id: "pro18", initials: "LR", name: "Dr. Laura Rimes", company: "Moderna", title: "VP of Research", exp: "14 Years", field: "Biotech", sessions: 66, rating: "4.8", available: false, bio: "Leading mRNA therapeutic pipelines. I can discuss the intersection of hard science and heavy venture capital.", topics: ["Clinical Trials", "FDA Approval", "IP Law", "Startup Hubs"] },
-    { id: "pro19", initials: "PJ", name: "Paul Jacobson", company: "Ogilvy", title: "Group Creative Director", exp: "17 Years", field: "Marketing", sessions: 104, rating: "4.9", available: true, bio: "Managing global ad accounts. Let's talk about the reality of pitching and dealing with difficult CMOs.", topics: ["Creative Briefs", "Client Management", "Campaign ROI", "Agency Life"] },
-    { id: "pro20", initials: "FT", name: "Fiona Tran", company: "Stripe", title: "Group Product Manager", exp: "9 Years", field: "Product Management", sessions: 175, rating: "5.0", available: true, bio: "Leading core payments integration. I'll explain how to lead without actually having any direct authority.", topics: ["Prioritization", "Stakeholder Mgmt", "PRDs", "Data-Driven Decisions"] }
+    { id: "pro7", initials: "VK", name: "Dr. Victor Kline", company: "CERN", title: "Lead Physicist", exp: "15 Years", field: "Science", fieldSlug: "science", sessions: 78, rating: "5.0", available: true, bio: "Managing multi-national particle experiments. Let's evaluate if a life in academia is actually for you.", topics: ["Grant Writing", "Post-doc Reality", "Industry vs Academia", "Publishing"] },
+    { id: "pro8", initials: "SS", name: "Samantha Sun", company: "OpenAI", title: "Research Scientist", exp: "9 Years", field: "Data & AI", fieldSlug: "data-ai", sessions: 210, rating: "4.9", available: false, bio: "Training LLMs at scale. I'll give you the unfiltered truth about the current AI hype cycle.", topics: ["Model Training", "Compute Scaling", "Research Scientist Path", "Ethics"] },
+    { id: "pro9", initials: "MB", name: "Marcus Bell", company: "Chicago Public Schools", title: "Principal", exp: "18 Years", field: "Education", fieldSlug: "education", sessions: 45, rating: "4.8", available: true, bio: "Taught for 12 years before administration. Let's discuss the systemic challenges vs individual impact.", topics: ["Admin Track", "Policy", "Teacher Retention", "Title I Schools"] },
+    { id: "pro10", initials: "AL", name: "Anna Larson", company: "Gensler", title: "Senior Architect", exp: "14 Years", field: "Architecture", fieldSlug: "architecture", sessions: 92, rating: "4.9", available: true, bio: "Leading commercial high-rise projects. I'll tell you how much of the job is design vs managing contractors.", topics: ["Licensure", "Client Relations", "BIM", "Urban Planning"] },
+    { id: "pro11", initials: "JT", name: "James Tucker", company: "The Atlantic", title: "Senior Staff Writer", exp: "12 Years", field: "Media & Journalism", fieldSlug: "media-journalism", sessions: 67, rating: "4.8", available: true, bio: "Surviving the changing media landscape. Happy to discuss the reality of freelancing vs staff jobs.", topics: ["Editorial Process", "Finding Sources", "Media Consolidation", "Substack"] },
+    { id: "pro12", initials: "NC", name: "Nadia Chen", company: "Sequoia Capital", title: "Partner", exp: "11 Years", field: "Entrepreneurship", fieldSlug: "entrepreneurship", sessions: 130, rating: "5.0", available: true, bio: "Former founder turned VC. I'll tell you the exact traits we look for before writing a seed check.", topics: ["Term Sheets", "Product-Market Fit", "Fundraising", "Pivoting"] },
+    { id: "pro13", initials: "DR", name: "Dr. David Rossi", company: "Private Practice", title: "Clinical Psychologist", exp: "20 Years", field: "Psychology", fieldSlug: "psychology", sessions: 88, rating: "4.9", available: false, bio: "Running a successful private practice. Let's talk about the emotional toll of carrying client trauma.", topics: ["Private Practice", "Insurance Billing", "Burnout", "Specialties"] },
+    { id: "pro14", initials: "EM", name: "Eva Martinez", company: "EPA", title: "Policy Director", exp: "16 Years", field: "Environmental", fieldSlug: "environmental", sessions: 54, rating: "4.8", available: true, bio: "Drafting federal water regulations. I can break down the slow grind of creating actual environmental change.", topics: ["Lobbying", "Federal Agencies", "Compliance", "NEPA"] },
+    { id: "pro15", initials: "AK", name: "Alex Kincaid", company: "CrowdStrike", title: "Threat Intel Lead", exp: "10 Years", field: "Cybersecurity", fieldSlug: "cybersecurity", sessions: 115, rating: "5.0", available: true, bio: "Tracking state-sponsored APTs. Let's discuss the stress of being the last line of defense during a breach.", topics: ["Incident Response", "Malware Analysis", "Red Teaming", "On-Call Stress"] },
+    { id: "pro16", initials: "SW", name: "Sarah Winters", company: "Epic Games", title: "Lead Level Designer", exp: "13 Years", field: "Gaming", fieldSlug: "gaming", sessions: 82, rating: "4.9", available: true, bio: "Shipped three AAA titles. I'll give you the reality check on game dev salaries and stability.", topics: ["AAA vs Indie", "Game Engines", "Production Schedules", "Contract Work"] },
+    { id: "pro17", initials: "HC", name: "Henry Cole", company: "NASA JPL", title: "Flight Director", exp: "18 Years", field: "Aerospace", fieldSlug: "aerospace", sessions: 140, rating: "5.0", available: true, bio: "Orchestrating Mars rover operations. Let's talk about making split-second decisions with a 14-minute delay.", topics: ["Mission Control", "Systems Eng", "Government vs Private", "Failure Analysis"] },
+    { id: "pro18", initials: "LR", name: "Dr. Laura Rimes", company: "Moderna", title: "VP of Research", exp: "14 Years", field: "Biotech", fieldSlug: "biotech", sessions: 66, rating: "4.8", available: false, bio: "Leading mRNA therapeutic pipelines. I can discuss the intersection of hard science and heavy venture capital.", topics: ["Clinical Trials", "FDA Approval", "IP Law", "Startup Hubs"] },
+    { id: "pro19", initials: "PJ", name: "Paul Jacobson", company: "Ogilvy", title: "Group Creative Director", exp: "17 Years", field: "Marketing", fieldSlug: "marketing", sessions: 104, rating: "4.9", available: true, bio: "Managing global ad accounts. Let's talk about the reality of pitching and dealing with difficult CMOs.", topics: ["Creative Briefs", "Client Management", "Campaign ROI", "Agency Life"] },
+    { id: "pro20", initials: "FT", name: "Fiona Tran", company: "Stripe", title: "Group Product Manager", exp: "9 Years", field: "Product Management", fieldSlug: "product-management", sessions: 175, rating: "5.0", available: true, bio: "Leading core payments integration. I'll explain how to lead without actually having any direct authority.", topics: ["Prioritization", "Stakeholder Mgmt", "PRDs", "Data-Driven Decisions"] }
   ]
 };
 
