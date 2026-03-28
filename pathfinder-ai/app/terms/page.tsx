@@ -33,7 +33,7 @@ export default function TermsPage() {
           <section>
             <h2 className="font-display font-bold text-2xl text-white mb-4">3. Refunds for Paid Sessions</h2>
             <p>
-              If an Industry Expert fails to attend a booked $15 session, you will be refunded 100% of the cost automatically within 48 hours. If you fail to attend the session without 24 hours prior written notice, the fee is non-refundable.
+              If an Industry Expert fails to attend a booked session, you will be automatically credited to re-book. If you fail to attend the session without 24 hours prior written notice, your booking privileges may be temporarily suspended.
             </p>
           </section>
         </div>

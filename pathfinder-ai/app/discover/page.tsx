@@ -4,11 +4,12 @@ import * as React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { motion, AnimatePresence } from 'framer-motion';
-import { QUESTIONS, CAREERS, MENTORS, VAULT_PROFESSIONALS, matchCareers } from '@/lib/mockData';
-import { CornerDownLeft, Sparkles, Printer, Share2, ArrowRight } from 'lucide-react';
+import { QUESTIONS, CAREERS, MENTORS, VAULT_PROFESSIONALS, VAULT_FIELDS, matchCareers } from '@/lib/mockData';
+import { CornerDownLeft, Sparkles, Printer, Share2, ArrowRight, Mic, Users } from 'lucide-react';
 import { useCareerContext } from '@/context/CareerContext';
 import { VoiceNotePlayer } from '@/components/ui/VoiceNotePlayer';
 import { MentorCard } from '@/components/ui/MentorCard';
+import { getFieldIcon } from '@/lib/icons';
 import Link from 'next/link';
 
 type Message = { role: 'ai' | 'user'; text: string; };
@@ -75,11 +76,47 @@ export default function DiscoverPage() {
 
   const handleSelectOption = (optIndex: number) => {
     const selectedOpt = QUESTIONS[currentQ].options[optIndex];
-    const newTraits = [...traits, ...selectedOpt.traits];
+    let newTraits = [...traits, ...selectedOpt.traits];
+
+    if (QUESTIONS[currentQ].id === "q_environment" && expandText.trim()) {
+      newTraits.push("Analytical", "Detail-Oriented", "Systems-Thinking", "Strategic");
+    }
+
     setTraits(newTraits);
     
     const userText = expandText.trim() ? `${selectedOpt.label}\n\n*Expansion: ${expandText}*` : selectedOpt.label;
     setMessages(prev => [...prev, { role: 'user', text: userText }]);
+    setExpandText("");
+    setIsTyping(true);
+    
+    setTimeout(() => {
+      if (currentQ < QUESTIONS.length - 1) {
+        const nextQ = currentQ + 1;
+        setCurrentQ(nextQ);
+        setMessages(prev => [...prev, { role: 'ai', text: `Scenario 0${nextQ + 1}:\n${QUESTIONS[nextQ].text}` }]);
+        setIsTyping(false);
+      } else {
+        setMessages(prev => [...prev, { role: 'ai', text: `Synthesizing your Reality Matrix based on your friction vectors...` }]);
+        setTimeout(() => {
+          const matchData = matchCareers(newTraits);
+          setResult(matchData);
+          setHasCompletedMatrix(true);
+          setTopCareers(matchData.matchedCareers);
+          setIsTyping(false);
+        }, 2500);
+      }
+    }, 1200);
+  };
+
+  const handleFreeTextSubmitOnly = () => {
+    if (!expandText.trim()) return;
+    let newTraits = [...traits];
+    if (QUESTIONS[currentQ].id === "q_environment") {
+      newTraits.push("Analytical", "Detail-Oriented", "Systems-Thinking", "Strategic");
+    }
+    setTraits(newTraits);
+    
+    setMessages(prev => [...prev, { role: 'user', text: expandText.trim() }]);
     setExpandText("");
     setIsTyping(true);
     
@@ -235,6 +272,7 @@ export default function DiscoverPage() {
                   className="bg-bg3 border-t border-border p-4 md:p-6"
                 >
                   <p className="font-display font-bold text-sm text-white mb-4 tracking-widest uppercase">Select your primary reaction:</p>
+                  
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
                     {QUESTIONS[currentQ].options.map((opt, i) => (
                       <button 
@@ -252,10 +290,16 @@ export default function DiscoverPage() {
                       type="text" 
                       value={expandText}
                       onChange={(e) => setExpandText(e.target.value)}
-                      placeholder="Optional: Expand on your reasoning..."
+                      placeholder={QUESTIONS[currentQ].id === "q_environment" ? "Or type your own reality here..." : "Optional: Expand on your reasoning..."}
                       className="w-full bg-bg border border-border rounded-xl pl-4 pr-12 py-3 text-white font-body text-sm focus:outline-none focus:border-amber transition-colors"
                       onKeyDown={(e) => {
-                        if (e.key === 'Enter' && expandText.trim()) handleSelectOption(0);
+                        if (e.key === 'Enter' && expandText.trim()) {
+                          if (QUESTIONS[currentQ].id === "q_environment") {
+                            handleFreeTextSubmitOnly();
+                          } else {
+                            handleSelectOption(0);
+                          }
+                        }
                       }}
                     />
                     <div className="absolute right-3 top-2.5 text-muted pointer-events-none">
@@ -295,8 +339,14 @@ export default function DiscoverPage() {
                       <div className="absolute top-0 right-0 bg-amber print:bg-black text-bg print:text-white font-display font-black text-2xl px-4 py-2 rounded-bl-2xl">
                         #{index + 1}
                       </div>
-                      <div className="font-display font-bold text-2xl text-white print:text-black mb-2 mt-4">{c.title}</div>
-                      <div className="font-body text-sm font-bold text-amber print:text-black tracking-widest uppercase mb-6">{c.field}</div>
+                      <div className="font-display font-bold text-2xl text-white print:text-black mb-2 mt-4 flex items-center gap-2">
+                        {getFieldIcon(c.field, "w-6 h-6 text-teal")}
+                        {c.title}
+                      </div>
+                      <div className="font-body text-sm font-bold text-amber print:text-black tracking-widest uppercase mb-6 flex items-center gap-1.5">
+                        {getFieldIcon(c.field, "w-4 h-4")}
+                        {c.field}
+                      </div>
                       
                       <div className="space-y-6 pt-4 border-t border-border/50 print:border-black/20">
                         <div>
@@ -349,14 +399,25 @@ export default function DiscoverPage() {
                 {/* FIX: Vault audits grouped by career ranking */}
                 <div className="space-y-12">
                   {topCareers.map((c: any, index: number) => {
-                    const clips = VAULT_PROFESSIONALS.filter(v => v.careerId === c.id);
+                    let clips = VAULT_PROFESSIONALS.filter(v => v.fieldSlug === c.fieldSlug || (v as any).secondaryField?.toLowerCase() === c.fieldSlug);
+                    clips.sort((a,b) => {
+                      const order = ['vp_dr_sabatini', 'vp_dr_amelia', 'vp_marcus', 'vp14'];
+                      const indexA = order.indexOf(a.id);
+                      const indexB = order.indexOf(b.id);
+                      
+                      if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+                      if (indexA !== -1) return -1;
+                      if (indexB !== -1) return 1;
+                      return 0;
+                    });
+                    if (c.fieldSlug === 'aerospace') clips = clips.slice(0, 4);
                     if (clips.length === 0) return null;
                     return (
                       <div key={'vault-' + c.id}>
                         <h3 className="font-display font-bold text-xl text-white mb-6 border-b border-border pb-2 flex items-center gap-3">
                           <span className="text-amber">#{index+1}</span> {c.title}
                         </h3>
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           {clips.map(prof => <VoiceNotePlayer key={prof.id} prof={prof} />)}
                         </div>
                       </div>
@@ -402,34 +463,48 @@ export default function DiscoverPage() {
                 <div className="max-w-2xl text-center mx-auto mb-12">
                   <h2 className="font-display font-black text-3xl md:text-4xl text-white mb-4">Not feeling these? That is completely fine.</h2>
                   <p className="font-body text-xl text-muted leading-relaxed">
-                    Your matrix is a starting point, not a verdict. You've completed the intake, which means you've unlocked full access to the entire platform.
+                    Your matrix is a starting point, not a verdict.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
                   {/* Explore Vault Card */}
-                  <Link href="/vault" className="bg-card border border-border rounded-3xl p-10 hover:border-teal/50 hover:bg-bg3 transition-all group flex flex-col justify-between">
+                  <Link href="/vault" className="bg-card border border-border rounded-3xl p-10 hover:border-amber/50 hover:bg-bg3 transition-all group flex flex-col justify-between shadow-[0_4px_20px_rgba(0,0,0,0.3)] min-h-[300px]">
                     <div>
-                      <h3 className="font-display font-black text-2xl text-white mb-4">Explore the Full Vault</h3>
+                      <h3 className="font-display font-black text-2xl text-white mb-4 flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-amber/20 text-amber flex items-center justify-center">
+                          <Mic size={20} />
+                        </div>
+                        Explore the Full Vault
+                      </h3>
                       <p className="font-body text-white/80 leading-relaxed mb-8">
-                        Browse all voice notes across every field. Hear from lawyers, designers, engineers, doctors, and more. Sometimes you discover a path by hearing someone talk about a job you had never considered.
+                        Browse all professionals across every field. Hear from people whose path you have not considered yet.
                       </p>
                     </div>
-                    <div className="flex items-center gap-2 font-display font-bold text-teal tracking-widest uppercase">
-                      Browse the Full Vault <ArrowRight size={18} className="transition-transform group-hover:translate-x-2" />
+                    <div className="mt-auto">
+                      <div className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-amber text-bg font-display font-bold text-sm tracking-widest uppercase transition-transform group-hover:scale-105 shadow-[0_0_20px_rgba(240,165,0,0.3)] gap-2">
+                        Go to the Vault <ArrowRight size={16} />
+                      </div>
                     </div>
                   </Link>
 
                   {/* Browse Mentors Card */}
-                  <Link href="/mentors" className="bg-card border border-border rounded-3xl p-10 hover:border-amber/50 hover:bg-bg3 transition-all group flex flex-col justify-between">
+                  <Link href="/mentors" className="bg-card border border-border rounded-3xl p-10 hover:border-teal/50 hover:bg-bg3 transition-all group flex flex-col justify-between shadow-[0_4px_20px_rgba(0,0,0,0.3)] min-h-[300px]">
                     <div>
-                      <h3 className="font-display font-black text-2xl text-white mb-4">Browse All Mentors</h3>
+                      <h3 className="font-display font-black text-2xl text-white mb-4 flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-teal/20 text-teal flex items-center justify-center">
+                          <Users size={20} />
+                        </div>
+                        Browse All Mentors
+                      </h3>
                       <p className="font-body text-white/80 leading-relaxed mb-8">
-                        See every near-peer and industry expert on the platform, across all fields. Filter by subject area. Find someone whose path surprises you and book a 15-minute reality check.
+                        See every near-peer and industry expert on the platform. Filter by field. Find someone whose story surprises you.
                       </p>
                     </div>
-                    <div className="flex items-center gap-2 font-display font-bold text-amber tracking-widest uppercase">
-                      Browse All Mentors <ArrowRight size={18} className="transition-transform group-hover:translate-x-2" />
+                    <div className="mt-auto">
+                      <div className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-teal text-bg font-display font-bold text-sm tracking-widest uppercase transition-transform group-hover:scale-105 shadow-[0_0_20px_rgba(0,212,168,0.3)] gap-2">
+                        Meet the Mentors <ArrowRight size={16} />
+                      </div>
                     </div>
                   </Link>
                 </div>

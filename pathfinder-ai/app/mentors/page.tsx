@@ -8,6 +8,7 @@ import { MENTORS } from '@/lib/mockData';
 import { useCareerContext } from '@/context/CareerContext';
 import { useRouter } from 'next/navigation';
 import { MentorCard } from '@/components/ui/MentorCard';
+import { getFieldIcon } from '@/lib/icons';
 
 export default function MentorsPage() {
   const router = useRouter();
@@ -65,12 +66,13 @@ export default function MentorsPage() {
             <button
               key={filter}
               onClick={() => setActiveFilter(filter)}
-              className={`px-5 py-2 rounded-full font-body text-sm font-bold transition-all duration-300 ${
+              className={`px-5 py-2 rounded-full font-body text-sm font-bold transition-all duration-300 flex items-center gap-2 ${
                 activeFilter === filter 
                 ? (activeTab === 'nearPeers' ? 'bg-amber text-bg shadow-[0_0_15px_rgba(240,165,0,0.3)]' : 'bg-teal text-bg shadow-[0_0_15px_rgba(0,212,168,0.3)]')
                 : 'bg-bg3 border border-border text-muted hover:text-white hover:border-white/30'
               }`}
             >
+              {filter !== 'All' && getFieldIcon(filter, "w-4 h-4")}
               {filter}
             </button>
           ))}

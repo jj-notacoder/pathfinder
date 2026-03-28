@@ -75,7 +75,7 @@ export default function Home() {
             transition={{ duration: 1, ease: "easeOut" }}
             className="font-display font-black text-4xl md:text-6xl lg:text-7xl leading-tight text-white/90"
           >
-            You are about to make a four-year, <span className="text-amber border-b-4 border-amber pb-2"> $100,000 decision</span> based on a web search.<br/><br/><span className="text-teal">Let&apos;s fix that asymmetry.</span>
+            You are about to make a four-year, <span className="text-amber border-b-4 border-amber pb-2"> million dollar decision</span> based on a web search.<br/><br/><span className="text-teal">Let&apos;s fix that asymmetry.</span>
           </motion.h2>
         </div>
       </section>

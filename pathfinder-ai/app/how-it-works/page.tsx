@@ -13,7 +13,7 @@ export default function HowItWorksPage() {
     { q: "How accurate is the Reality Matrix?", a: "The Matrix is based on validated psychometric models testing ambiguity tolerance and friction response. When tested against professionals with 5+ years of experience, it successfully predicted their field 94% of the time." },
     { q: "Are the mentors actually verified?", a: "Yes. Every Near-Peer must verify their university email, and every Industry Expert goes through a manual LinkedIn and employment verification process before being listed in the Vault." },
     { q: "Is the audio really unscripted?", a: "100%. We provide our professionals with a single prompt (e.g. 'What is the hardest part of your day?') and ask them to record a Voice Note right there from their phone. No PR teams, no editing." },
-    { q: "How much does a 15-minute session cost?", a: "Near-Peer sessions are completely free for high school students. Industry Expert sessions are $15, which goes entirely to the expert (most of them donate it to our scholarship fund)." }
+    { q: "How much does a session cost?", a: "Every single session is completely free. Our Industry Experts volunteer their time as part of structured corporate outreach and social impact programmes, and Near-Peers are funded via university partnerships." }
   ];
 
   return (

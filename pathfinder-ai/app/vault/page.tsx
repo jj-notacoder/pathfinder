@@ -8,17 +8,18 @@ import { VAULT_PROFESSIONALS } from '@/lib/mockData';
 import { useCareerContext } from '@/context/CareerContext';
 import { useRouter } from 'next/navigation';
 import { VoiceNotePlayer } from '@/components/ui/VoiceNotePlayer';
+import { getFieldIcon } from '@/lib/icons';
 
 export default function VaultPage() {
   const router = useRouter();
   const { hasCompletedMatrix } = useCareerContext();
   const [activeFilter, setActiveFilter] = useState('All');
 
-  const filters = ['All', 'Technology', 'Engineering', 'Medicine', 'Law', 'Design', 'Finance'];
-
+  const { VAULT_FIELDS } = require('@/lib/mockData');
+  
   const filteredData = activeFilter === 'All' 
     ? VAULT_PROFESSIONALS 
-    : VAULT_PROFESSIONALS.filter(v => v.field === activeFilter);
+    : VAULT_PROFESSIONALS.filter(v => v.field === activeFilter || (v as any).secondaryField === activeFilter);
 
   return (
     <div className="min-h-screen bg-bg pt-[60px] md:pt-[72px] flex flex-col relative overflow-hidden">
@@ -43,20 +44,29 @@ export default function VaultPage() {
         </motion.div>
 
         {/* Filters */}
-        <div className="flex flex-wrap gap-3 mb-12">
-          {filters.map(filter => (
-            <button
-              key={filter}
-              onClick={() => setActiveFilter(filter)}
-              className={`px-6 py-2 rounded-full font-body text-sm font-bold transition-all duration-300 ${
-                activeFilter === filter 
-                ? 'bg-teal text-bg shadow-[0_0_15px_rgba(0,212,168,0.3)]' 
-                : 'bg-bg3 border border-border text-muted hover:text-white hover:border-white/30'
-              }`}
-            >
-              {filter}
-            </button>
-          ))}
+        <div className="mb-12">
+          <div className="flex flex-wrap gap-2.5">
+            {VAULT_FIELDS.map((filter: string) => (
+              <button
+                key={filter}
+                onClick={() => {
+                  if (activeFilter !== filter) {
+                    window.speechSynthesis.cancel();
+                    window.dispatchEvent(new CustomEvent('vault-audio-stop-all'));
+                    setActiveFilter(filter);
+                  }
+                }}
+                className={`px-5 py-2.5 rounded-full font-body text-[13px] whitespace-nowrap font-bold transition-all duration-300 flex items-center gap-2 ${
+                  activeFilter === filter 
+                  ? 'bg-teal text-bg shadow-[0_0_15px_rgba(0,212,168,0.3)]' 
+                  : 'bg-bg3 border border-border text-muted hover:text-white hover:border-white/30'
+                }`}
+              >
+                {filter !== 'All' && getFieldIcon(filter, "w-4 h-4")}
+                {filter}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Grid */}

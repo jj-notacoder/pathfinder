@@ -1,0 +1,122 @@
+export const VAULT_PROF_11_20 = [
+  {
+    id: "vp11",
+    initials: "RS",
+    name: "Ravi Sharma",
+    role: "Epidemiologist",
+    yearsExp: 10,
+    field: "Science",
+    fieldSlug: "science",
+    questionAsked: "What does an epidemiologist actually do when there is no pandemic?",
+    voiceScript: "Opening my inbox at 8 AM to seventy emails from the state department of health about a localized out-of-season flu spike in three adjacent counties. People think I walk around in a hazmat suit fighting global viruses, but peacetime epidemiology is almost entirely data modeling and statistical paranoia. My morning is spent entirely inside R Studio, running spatial distribution models on water quality reports. When there is no pandemic, your job is invisible architecture. You are trying to find patterns in boring, everyday data to prevent the next disaster before anyone outside this building even notices it. By midday, I'm on a tense Zoom call with local public health officials. I'm trying to convince them to divert half a million dollars of their budget to mosquito control this summer because our climate models predict a massive spike in vector-borne diseases. They look at me like I'm crazy because the weather is currently fine. That is the hardest part. You are constantly fighting against human nature, which ignores invisible threats until they become visible crises. In the afternoon, I might pivot to reviewing clinical trial data for a new vaccine rollout strategy. It is highly academic, deeply analytical work that requires you to hold thousands of variables in your head at once. You leave work exhausted from fighting a war that hasn't started yet. You walk through the grocery store and you can't help but notice the airflow systems and the way people touch their faces. It changes how you view human interaction fundamentally. If you love deep statistics and have the patience to do critical work that no one will ever thank you for because 'nothing happened', this is the field for you.",
+    estimatedDuration: Math.round(1682 / 13.5)
+  },
+  {
+    id: "vp12",
+    initials: "NV",
+    name: "Nina Volkova",
+    role: "Clinical Psychologist",
+    yearsExp: 8,
+    field: "Psychology",
+    fieldSlug: "psychology",
+    questionAsked: "How do you switch off after listening to trauma all day?",
+    voiceScript: "Sitting in my chair at 8:45 AM, mentally preparing the room for my first client. Being a therapist is not just nodding and asking people how they feel. It is extreme emotional labor. My first three hours are back-to-back sessions: severe depression, complex PTSD, and a failing marriage. You are attempting to logically map out the irrational architecture of someone else's mind while simultaneously modeling total emotional stability. It is mentally draining in a way that physical work cannot compare to. By lunch time, I am writing clinical notes. The documentation is heavy because insurance companies demand proof of 'measurable progress' for things that are inherently immeasurable. How do you quantify grief on a spreadsheet? You can't, but I spend my entire afternoon trying to. In the afternoon sessions, I have a breakthrough with a young woman who has been trapped in an anxiety loop for two years. For an hour, I watch her entire physical posture change as she finally understands her own defense mechanisms. Those are the moments that make the immense emotional weight worth it. You are helping people reconstruct their reality. How do I switch off at 6 PM? You don't, fully. I have a 30-minute commute and I listen to heavy metal music just to forcefully break the empathic connection I've held all day. You have to build massive psychological walls, or the secondary trauma will destroy your own life within five years. If you want to do this, you must be infinitely curious about the human condition and ruthlessly protective of your own mental boundaries.",
+    estimatedDuration: Math.round(1641 / 13.5)
+  },
+  {
+    id: "vp13",
+    initials: "OF",
+    name: "Omar Farouq",
+    role: "Startup Founder",
+    yearsExp: 6,
+    field: "Entrepreneurship",
+    fieldSlug: "entrepreneurship",
+    questionAsked: "What does a founder's Tuesday actually look like when things are hard?",
+    voiceScript: "Staring at the bank balance at 7:30 AM, calculating exactly how many days of runway we have left before we miss payroll. The internet glorifies founders like we are visionary geniuses changing the world from a trendy coffee shop. The absolute reality is that I am a professional firefighter. My morning starts by realizing the lead engineer quit overnight because a bigger tech giant offered him double the salary I can afford. I spend two hours begging my investors on the phone to release a bridge round so I can hire a replacement. By midday, I have to wipe the panic entirely off my face and jump on a sales call with a massive enterprise client. If I don't close this deal, the company dies in four months. You have to project total confidence, vision, and stability while internally you are doing survival math. The psychological whiplash is violent. In the afternoon, the product goes down. I am in the Slack channel trying to calm down twelve angry customers while desperately trying to reach my remaining engineers. You are everything from the CEO to the janitor. You write the vision docs, and you also take out the trash in the co-working space because you can't afford cleaners. At 9 PM, everyone has gone home, and it is just me staring at a whiteboard, trying to figure out how to pivot our core feature to increase retention. The pressure is incredibly isolating. It requires a level of delusional optimism and pain tolerance that is very hard to fake. Don't be a founder if you want a boss to tell you what to do. Be a founder if you literally cannot imagine letting anyone else build your vision.",
+    estimatedDuration: Math.round(1711 / 13.5)
+  },
+  {
+    id: "vp14",
+    initials: "ZM",
+    name: "Zara Malik",
+    role: "Aerospace Engineer",
+    yearsExp: 7,
+    field: "Aerospace",
+    fieldSlug: "aerospace",
+    questionAsked: "What is the day-to-day reality of working on aircraft systems?",
+    voiceScript: "Reviewing the failure modes and effects analysis document for a hydraulic actuator assembly at 8 AM. Again. Aerospace engineering is sold as the glamorous pursuit of space and flight, but day-to-day, it is an exercise in extreme, meticulous risk management. For the first four hours of my day today, I did nothing but write Python scripts to parse massive datasets of vibration tests from a wind tunnel. I am looking for anomalies that are barely distinguishable from background noise. If I miss that anomaly, and this part goes into production, a three-hundred-million-dollar machine could fall out of the sky in five years. The weight of that responsibility slows everything down to a crawl. In the afternoon, I sit in a two-hour design review meeting with twenty other engineers. We are arguing over the placement of a single sensor bracket. The electrical guys want it moved left to avoid interference, the structural guys say that compromises the load path, and I'm arguing that moving it at all changes the thermal profile. It is a grueling, bureaucratic process of compromise disguised as math. It is very easy to feel like a tiny cog in an impossibly large machine. But a few times a year, you go out to the testing facility in the desert. You stand half a mile away in a bunker, and you watch a machine that you helped design ignite and literally shake the earth as it breaks gravity. The math on your screen becomes thunder. That feeling justifies the thousands of hours of looking at spreadsheets. You need intense patience and an absolute obsession with detail to survive here.",
+    estimatedDuration: Math.round(1661 / 13.5)
+  },
+  {
+    id: "vp15",
+    initials: "BH",
+    name: "Ben Holloway",
+    role: "Environmental Consultant",
+    yearsExp: 9,
+    field: "Environmental",
+    fieldSlug: "environmental",
+    questionAsked: "Is environmental work actually making a difference or is it greenwashing?",
+    voiceScript: "Standing in a muddy field at 6:30 AM taking soil samples next to a massive corporate manufacturing plant. A lot of people enter environmental science thinking they are going to chain themselves to trees and save the rainforest. The reality is that I am a highly paid mercenary of compliance. The company that hired me is paying me to tell them exactly how close to the legal pollution limit they can get without being fined by the EPA. My morning is spent entirely in the mud, collecting data. My afternoon is spent entirely in a sterile corporate boardroom, translating that dirt into financial risk models. The executives don't care about the ecosystem; they care about liability. I have to look a CEO in the eye and explain that if they don't spend two million dollars upgrading their wastewater filtration system, they are going to face a ten million dollar class-action lawsuit in five years. It is incredibly cynical work. You see the absolute worst of corporate greed firsthand. You see companies actively trying to exploit loopholes in regulations. But here is the truth: because I am in that room, because I understand the regulations better than they do, I force them to build the filtration system. I force them to clean up the site. I am actually materially reducing the poison going into that river. It's not glamorous activism; it's grinding, bureaucratic trench warfare. You go home knowing you compromised, but you also go home knowing the water is cleaner than it would have been if you weren't there. If you want purity, be an activist. If you want measurable, ugly progress, be a consultant.",
+    estimatedDuration: Math.round(1662 / 13.5)
+  },
+  {
+    id: "vp16",
+    initials: "CE",
+    name: "Chioma Eze",
+    role: "Biotech Researcher",
+    yearsExp: 5,
+    field: "Biotech",
+    fieldSlug: "biotech",
+    questionAsked: "What does a day in a biotech lab actually feel like?",
+    voiceScript: "Arriving at the lab at 8 AM to check the incubator, praying that the mammalian cell cultures I've been babying for three weeks didn't get contaminated overnight. Biotech is an incredibly hostile environment disguised as a sterile laboratory. For the first three hours, I am pipetting clear liquids into other clear liquids in microscopic quantities. A single sneeze, a slight fluctuation in room temperature, or staring at the cells wrong can ruin a month of work. You live in a constant state of hyper-vigilance. Today, my primary goal is running a Western blot to see if our synthetic protein is actually expressing in the cells. It takes six hours of meticulous, step-by-step chemical washing to get the result. The waiting is agonizing. At 4 PM, I run the film. The protein didn't express. The band is completely blank. The entire hypothesis of my last three months of work is functionally dead in an instant. This is the reality of biotech: an estimated 90% of your experiments will fail. The afternoon is spent sitting at my desk, looking at the literature, completely restructuring my approach based on that failure. You have to possess a mind that loves being proven wrong, because biology does not care about your ego or your funding timeline. But when you hit that 10%, when you finally see the glowing band that proves you successfully edited a genome or synthesized a novel therapeutic pathway, you are literally witnessing something that has never existed in nature before. You are rewriting the fundamental code of life. It requires monk-like patience and an absolute resilience to structural failure to survive in this field.",
+    estimatedDuration: Math.round(1679 / 13.5)
+  },
+  {
+    id: "vp17",
+    initials: "LF",
+    name: "Lucas Ferreira",
+    role: "Architect",
+    yearsExp: 12,
+    field: "Architecture",
+    fieldSlug: "architecture",
+    questionAsked: "How much of architecture is actually designing beautiful buildings?",
+    voiceScript: "Arguing with a city zoning official on the phone at 9 AM about why my building's setback needs to be 15 feet instead of 20 feet. Architecture school teaches you that you are an artist shaping the skyline. The profession teaches you that you are a highly educated project manager fighting gravity, budget, and local government. My morning is entirely consumed by code compliance. Designing the beautiful glass facade took maybe two days. Figuring out how to insulate that glass, route the HVAC ducts so they don't look terrible, and ensure it survives a seismic event takes six months. By lunch, I am on a construction site. I am yelling over the sound of concrete drills, trying to explain to a contractor that he poured the slab four inches out of alignment with my drawings. He tells me fixing it will cost fifty thousand dollars and delay the project a month. I have to call the client and break the news. Architecture is constant, high-stakes conflict resolution. You are the mediator between the client's impossible dreams, the engineer's strict math, and the contractor's brutal shortcuts. The afternoon is spent detailing door frames in Revit. It is incredibly tedious, meticulous work that nobody will ever notice unless you do it wrong. But years later, you walk past a massive physical structure that started as a sketch on your iPad. People are living in it, working in it, experiencing the light exactly the way you modeled it. It is permanent physical proof of your existence. You just have to endure years of spreadsheets and yelling to get it built.",
+    estimatedDuration: Math.round(1637 / 13.5)
+  },
+  {
+    id: "vp18",
+    initials: "ML",
+    name: "Mei Lin",
+    role: "Investigative Journalist",
+    yearsExp: 6,
+    field: "Media & Journalism",
+    fieldSlug: "media-journalism",
+    questionAsked: "What does it actually take to break a story?",
+    voiceScript: "Sitting in my car at 7 AM outside a corporate warehouse, waiting to see if a whistleblower will actually show up. Investigative journalism is not typing furiously at a desk while dramatic music plays; it is 95% waiting, getting rejected, and reading extremely boring public records. The whistleblower doesn't show up. My morning is instantly derailed. I drive back to the newsroom and spend four hours combing through hundreds of pages of municipal tax filings, trying to find a single discrepancy in a shell company's ownership structure. It is mind-numbing data entry disguised as glamorous sleuthing. By midday, my editor is pushing me for a word count because the daily news cycle is starving, but I refuse to publish until I get a second source on the record. The pressure to feed the machine with low-quality content is immense, but if you get it wrong in this field, you get sued into oblivion. The entire afternoon is spent making phone calls to people who absolutely do not want to talk to me. I get hung up on six times. I get threatened with legal action twice. You have to be deeply comfortable with conflict and universally disliked by powerful people. Around 6 PM, the whistleblower finally calls me back. I spend two hours in a diner booth across from someone who is risking their entire livelihood to tell me the truth about a systemic labor violation. You carry their fear with you when you go home. Breaking a real story is a slow, grueling war of attrition against silence. You only do this if you are obsessed with holding power accountable and can survive on bad coffee and constant rejection.",
+    estimatedDuration: Math.round(1682 / 13.5)
+  },
+  {
+    id: "vp19",
+    initials: "TH",
+    name: "Tariq Hassan",
+    role: "Machine Learning Engineer",
+    yearsExp: 4,
+    field: "Data & AI",
+    fieldSlug: "data-ai",
+    questionAsked: "What does an ML engineer do when the model just will not work?",
+    voiceScript: "Staring blindly at a terminal full of infinite loss function errors at 9:30 AM. People think building AI is like talking to a futuristic supercomputer. The reality is that I am currently begging thousands of matrix multiplications to stop outputting complete garbage. Yesterday, my computer vision model was identifying pedestrians with 98% accuracy. Today, I fed it pictures of people holding umbrellas and it classified them all as traffic lights. The entire morning is spent playing detective inside a black box. You can't just trace a logic error like traditional software; the model learned poorly, and you have to figure out if it's the architecture, the learning rate, or just contaminated training data. By lunch, I realize our data labeling team accidentally tagged 5,000 images of raincoats as vehicles. It’s entirely human error ruining advanced mathematics. The afternoon is spent trying to optimize the model to run faster. Getting a robust AI to work in a sandbox is easy. Getting it to run in milliseconds on a cheap mobile processor without draining the battery is a completely different nightmare. I spend hours quantizing weights and stripping out precision just to make it functional for the consumer. You are constantly balancing accuracy with raw computational cost. You leave the office incredibly frustrated, because unlike traditional engineering, AI is highly non-deterministic. Sometimes it works, and you don't fully understand why. Sometimes it breaks, and you have no idea how to fix it. But when the weights finally converge, and you watch a machine accurately interpret the chaos of the real world in real-time... it feels shockingly close to magic. You just endure a mountain of frustrating math to get there.",
+    estimatedDuration: Math.round(1680 / 13.5)
+  },
+  {
+    id: "vp20",
+    initials: "AD",
+    name: "Amara Diallo",
+    role: "Secondary School Teacher",
+    yearsExp: 8,
+    field: "Education",
+    fieldSlug: "education",
+    questionAsked: "What is the part of teaching nobody warned you about?",
+    voiceScript: "Clocking in at 7 AM to frantically photocopy thirty worksheets because the master printer jammed again. Everybody warns you that teenagers are tough and the pay is bad, but nobody warns you about the relentless, exhausting pace of decision fatigue. Every single day, I have to make about a thousand micro-decisions before noon. I look at my first period class—thirty kids. Three of them didn't eat breakfast, two are having a silent panic attack about a college application, and one is aggressively trying to derail my lesson on constitutional history. The morning is pure performance art. You are acting out endless high-energy enthusiasm while simultaneously scanning the room like a hawk, managing behavior, tracking comprehension, and constantly adapting your lesson plan on the fly. By lunch, which is exactly twenty-two minutes long and usually eaten while standing up and grading quizzes, my voice is raw. The afternoon is heavily bureaucratic. I have an IEP meeting to legally document why I have to modify my curriculum for a struggling student, and then I have to email defensive parents who are convinced their brilliant child isn't actually failing. Teaching is maybe forty percent actually delivering academic content. The other sixty percent is social work, data entry, crowd control, and emotional triage. At 5 PM, the building is silent. I sit at my desk, completely drained, finally looking at the essays they wrote. And I find one from the kid who has been struggling all year, and he finally understood the thesis structure perfectly. It is a tiny, microscopic victory that changes the entire trajectory of an actual human being's life. You take that deeply quiet win home with you, and it gives you just enough energy to come back and perform it all again tomorrow.",
+    estimatedDuration: Math.round(1750 / 13.5)
+  }
+];

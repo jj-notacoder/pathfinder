@@ -1,0 +1,122 @@
+export const VAULT_PROF_21_30 = [
+  {
+    id: "vp21",
+    initials: "FW",
+    name: "Felix Wagner",
+    role: "Structural Engineer",
+    yearsExp: 10,
+    field: "Engineering",
+    fieldSlug: "engineering",
+    questionAsked: "What does a structural engineer worry about that nobody else does?",
+    voiceScript: "Arriving on a dusty construction site at 6:00 AM, holding a cup of lukewarm coffee, staring up at a skeletal steel frame against the grey sky. When you walk into a beautifully designed high-rise, you admire the glass and the light. What I see, permanently etched into my brain, are the invisible forces trying to rip that building down. Gravity, shear wind forces, shifting techtonic plates—the earth is constantly trying to flatten everything humans build. My morning is usually spent inside massive analytical models. I am calculating the exact required diameter of a rebar cage inside a concrete pillar on the 14th floor, because if the wind hits the side of the building at 120 miles per hour, that specific pillar has to twist and absorb the kinetic energy without snapping. And if I am wrong, people die in catastrophic numbers. Architecture is art; structural engineering is pure paranoia enforced by physics. By midday, I am arguing with the lead architect because they want a cantilevered floor extending twenty feet with no visible structural support because they want it to look 'floating and ethereal'. I have to be the villain who ruins the pristine design and forces them to add a visible, massive steel brace. The afternoon is deeply rigorous. One decimal point out of place in SAP2000, and my firm goes bankrupt. I go home feeling a strange sense of heavy responsibility every single time I cross a bridge or elevate inside a tall building. If you love uncompromising mathematics and carry an obsessional, defensive mindset against the raw forces of nature, you'll thrive here. Most people only notice my work if it fails spectacularly.",
+    estimatedDuration: Math.round(1688 / 13.5)
+  },
+  {
+    id: "vp22",
+    initials: "IM",
+    name: "Isla Mackenzie",
+    role: "Brand Strategist",
+    yearsExp: 7,
+    field: "Marketing",
+    fieldSlug: "marketing",
+    questionAsked: "What does a brand strategist do that a marketer cannot?",
+    voiceScript: "Staring at a blank wall filled with sticky notes at 9 AM, attempting to distil a massive, faceless software company into a single, cohesive human emotion. Most people think marketing is just buying Facebook ads or writing catchy slogans. That is execution. Brand strategy is architecture. I start my morning completely breaking apart a huge corporation's ego. A CEO hired me because their enterprise software isn't selling. They want better ads. I run focus groups and perform ethnographic research on their actual users, and I have to present a brutally honest slide deck by noon telling the CEO that their product isn't selling because nobody trusts their tone of voice. They sound arrogant when their users are desperately seeking empathy. The hardest part of this job is not the creative aspect; it is corporate therapy. Half my afternoon is spent in tense workshops trying to align thirty viciously competitive executives on what their company actually stands for beneath the profit margins. You have to be deeply intuitive, incredibly persuasive, and entirely immune to corporate spin. I spend the rest of the day building the brand bible: detailing the exact philosophical tone, visual language, and emotional cadence the company is allowed to use globally. You leave the office mentally exhausted from fighting an invisible war for authenticity inside a profoundly cynical system. Your work rarely has your name on it, but when a brand suddenly feels deeply resonant and human, that is because someone like me fought for it.",
+    estimatedDuration: Math.round(1679 / 13.5)
+  },
+  {
+    id: "vp23",
+    initials: "DP",
+    name: "David Park",
+    role: "Neuroscientist",
+    yearsExp: 6,
+    field: "Science",
+    fieldSlug: "science",
+    questionAsked: "What is it like to study the brain and still not understand it?",
+    voiceScript: "Adjusting the focal plane of a two-photon microscope at 8:30 AM, looking at a live slice of murine cortex fluorescing bright green. It is deeply humbling to look at a firing synapse and realize that this microscopic burst of calcium is exactly what constitutes a memory, a fear, or a sense of self. And yet, almost everything we 'know' about the brain is fundamentally an approximation. The first four hours of my day are spent in near-total darkness, running highly sensitive electrophysiology rigs to record the electrical spikes of perhaps ten individual neurons out of eighty billion. The failure rate is catastrophic. If the temperature in the room shifts by two degrees, the slice dies and the morning is lost. The glamorous aspect of neuroscience is presenting sweeping theories about consciousness at conferences. The reality is spending seventy hours a week trying to isolate the exact receptor binding affinity of a single obscure neurotransmitter. By lunch, I am parsing through gigabytes of raw electrical waveforms trying to find a pattern that proves our hypothesis about associative learning. Usually, the data tells me I am wrong. Most of science is just meticulously documenting how you are wrong. The afternoon is heavily bureaucratic: fighting for grant money. I write endless proposals justifying to wealthy committees why fundamental brain research matters. You have to love the profound mystery of the unknown. I leave the lab at 9 PM realizing I've dedicated my life to the most complex structure in the known universe, and I will probably die before we even understand five percent of it. But standing on the edge of that frontier is a drug I cannot let go of.",
+    estimatedDuration: Math.round(1693 / 13.5)
+  },
+  {
+    id: "vp24",
+    initials: "FA",
+    name: "Fatima Al-Rashid",
+    role: "Emergency Medicine Doctor",
+    yearsExp: 9,
+    field: "Medicine",
+    fieldSlug: "medicine",
+    questionAsked: "What is a shift in emergency medicine actually like emotionally?",
+    voiceScript: "Gulping cold coffee at 7 PM to start a 12-hour overnight shift. You walk through the double doors and immediately the ambient noise hits you. The wailing, the frantic beeping of vital monitors, the smell of chemical sterile scrub mixed with iron and sweat. Emergency medicine is a completely different mental posture compared to the rest of the hospital. We don't diagnose rare diseases; we stabilize chaos. My first hour is rapid-fire triage. I'm suturing a deep laceration on a terrified five-year-old child, and simultaneously keeping one eye on the trauma bay because EMS just radioed in a massive blunt-force collision incoming. You are operating on pure algorithmic instinct. Airway, breathing, circulation. You cannot afford to feel emotion in the moment. When the collision victim arrives, it is thirty minutes of intensely orchestrated violence: chest compressions, plunging central lines, yelling for blood units over the din. And sometimes, despite doing everything flawlessly, you lose them. That is the hardest part. The line between life and death is shockingly thin, and at 3 AM you cross back and forth over it casually. A nurse will hand you the time-of-death clipboard, you sign it, and you literally have three minutes to compose your face in the hallway before you walk into the next room to definitively tell a pregnant woman she just had a miscarriage. It is profound psychological whiplash. By 7 AM, I am walking through the sliding doors into the bright morning sun, completely hollowed out but deeply alive. You do this if you have the mental fortitude to be the absolute calmest person in the single worst crisis of someone else's life.",
+    estimatedDuration: Math.round(1696 / 13.5)
+  },
+  {
+    id: "vp25",
+    initials: "TN",
+    name: "Theo Nakamura",
+    role: "AR/VR Developer",
+    yearsExp: 4,
+    field: "Gaming",
+    fieldSlug: "gaming",
+    questionAsked: "What is it like to build worlds that exist inside a headset?",
+    voiceScript: "Pulling the heavy VR headset off my face at 10 AM, utterly nauseous because I accidentally coded the camera's rotational axis backwards and effectively simulated extreme vertigo for thirty seconds. Building in spatial computing is fundamentally different from a flat screen; if you drop a frame or mess up a physics calculation, your user physically throws up. The morning is spent completely immersed inside Unity. I am attempting to create a perfectly realistic digital hand that respects the collision constraints of an invisible digital object. When you reach for a virtual coffee mug, your physical hand closes but your digital hand must stop exactly at the edge of the ceramic surface. The math required to make that feel natural without haptic feedback is incredibly dense. By midday, I am arguing with the lead artist. They modeled a beautiful, hyper-realistic, high-poly environment. I have to explain to them that rendering that environment 90 times a second per eye on a mobile headset processor will literally melt the device. The afternoon is an endless cycle of extreme optimization. I spend four hours stripping out dynamic lighting, baking shadows into the textures, and reducing poly counts just to hit a stable framerate. The debugging is physically exhausting. You write the script on your monitor, strap the headset on, flail your arms around blindly, realize the physics broke, take the headset off, and rewrite the math. Over and over again. But when you finally nail it, and you hand the headset to a non-technical tester, and you watch them instinctively reach out and try to lean on a digital table that doesn't actually exist in the physical room? That profound illusion makes the countless hours of nausea completely worth it.",
+    estimatedDuration: Math.round(1715 / 13.5)
+  },
+  {
+    id: "vp26",
+    initials: "GO",
+    name: "Grace Okonkwo",
+    role: "Public Health Analyst",
+    yearsExp: 5,
+    field: "Science",
+    fieldSlug: "science",
+    questionAsked: "What does public health work look like outside of a crisis?",
+    voiceScript: "Logging into deeply clunky, ancient government databases at 8:30 AM to aggregate maternal mortality statistics across three rural counties. Public health is an exercise in extreme patience and infuriating bureaucracy. People assume we are out physically delivering vaccines in jungles, but a massive portion of the field is heavily administrative. My entire morning is spent cross-referencing demographic data to prove a wildly uncomfortable truth to the state legislature: the lack of a single bus route to the county hospital is directly causing a 15% spike in preventable infant mortality in low-income neighborhoods. By noon, I am drafting policy memorandums. You have to translate complex epidemiological statistics into incredibly simple bullet points that a politician who knows nothing about science can digest in three minutes. And then, you wait. The hardest part of public health is the timeline. I might spend two years rigorously proving that a specific environmental toxin from a nearby factory is elevating childhood asthma rates. After presenting irrefutable proof, a committee will form, they will debate it for eighteen months, and maybe, eventually, they will impose a minor fine. It is deeply cynical, grinding work. You are fighting massive systemic apathy with spreadsheets. In the afternoon, I pivot to designing a completely unglamorous public messaging campaign about handwashing for schools. You go home knowing that you are fighting the tide with a spoon. But every so often, a piece of legislation passes because of your data, or a clinic gets funding because of your model, and you realize you just quietly saved thousands of lives without a single person ever knowing your name.",
+    estimatedDuration: Math.round(1682 / 13.5)
+  },
+  {
+    id: "vp27",
+    initials: "ST",
+    name: "Sam Torres",
+    role: "Ethical Hacker (Pen Tester)",
+    yearsExp: 6,
+    field: "Cybersecurity",
+    fieldSlug: "cybersecurity",
+    questionAsked: "What is it actually like to be paid to break into systems legally?",
+    voiceScript: "Sitting in a rented car outside a major bank's corporate campus at 6 AM, holding a cloned RFID badge, waiting for an employee to hold the side door open so I can slip in undetected. Most of penetration testing is highly technical screen work, but a few times a year, I am contracted to perform physical security breaches. My heart is hammering. I slip past the door, walk confidently to an unused conference room, plug a discreet hardware keylogger into a networked terminal under the desk, and walk out. Boom. I just compromised their entire internal intranet. The afternoon is much less theatrical but equally intense. I am sitting at my desk, legally sanctioned by a client, running automated vulnerability scanners against their public-facing web applications. I spend four hours analyzing the raw output, looking for a single unpatched SQL injection vulnerability. When I find it, the adrenaline spike is massive. I slowly craft a customized payload, watching as the database unspools its encrypted admin credentials directly to my terminal. It genuinely feels like holding a skeleton key to a fortress. But here is the stark reality: the high of breaking the system is instantly followed by the brutal grind of documenting exactly how you did it. I will spend the next two days writing a highly detailed, extremely dry 80-page report for executives, explaining their architectural failures and demanding they patch them immediately. The job is an incredible rush of adversarial thinking, but it forces you into a mindset of perpetual paranoia. If you love the puzzle of dismantling complex logic gates and breaking rules purely to prove you can, it's the best job in the world.",
+    estimatedDuration: Math.round(1688 / 13.5)
+  },
+  {
+    id: "vp28",
+    initials: "HI",
+    name: "Hana Iwata",
+    role: "Genetic Counsellor",
+    yearsExp: 7,
+    field: "Biotech",
+    fieldSlug: "biotech",
+    questionAsked: "What do you say to someone who just found out they carry a disease gene?",
+    voiceScript: "Reviewing the raw microarray sequencing results at 9 AM, and feeling a cold knot form in my stomach. The data clearly shows a highly penetrant BRCA1 mutation. In an hour, a young woman is going to walk into my office expecting standard routine results, and I am going to definitively inform her that she has an 80% lifetime risk of developing aggressive breast cancer. This is the heavy, agonizing burden of genetic counseling. We live precisely at the intersection of complex molecular biology and profound human tragedy. My morning is deeply academic: I am pouring over the latest genomic literature, trying to understand if a specific variant of uncertain significance in a pediatric patient's rare neurological disease is actually pathogenic or just background noise. By midday, the clinical sessions begin. You are essentially a highly technical therapist. The patient arrives, and you must maintain an absolute, steady calm. You have to take incredibly dense concepts like autosomal dominant inheritance and translate them into empathetic, actionable reality for someone whose entire world just shattered. The emotional weight is astronomical. How do you counsel parents who just learned both their children inherited a fatal, progressive neurological disorder? You sit with them in the silence. You draw out a pedigree tree. You provide them with the hard truth, stripped of medical jargon, and you offer them a pathway forward regarding family planning and clinical trials. By 5 PM my emotional reserves are completely depleted. I commute home in total silence. You do this job because you believe that carrying the burden of truth alongside a grieving family is the highest form of clinical grace.",
+    estimatedDuration: Math.round(1681 / 13.5)
+  },
+  {
+    id: "vp29",
+    initials: "KA",
+    name: "Kwame Asante",
+    role: "Urban Planner",
+    yearsExp: 8,
+    field: "Architecture",
+    fieldSlug: "architecture",
+    questionAsked: "What does an urban planner do when a city rejects their design?",
+    voiceScript: "Standing furiously at the microphone in a stark municipal building at 8:30 PM, defending a mixed-use affordable housing project against a synchronized mob of wealthy neighborhood associations. The academic theory of urban planning is beautiful: designing equitable transit systems, vibrant public spaces, and environmentally sustainable grids. The actual practice of urban planning is essentially political warfare. My morning starts peacefully inside GIS mapping software. I am layering demographic income data over transit access maps, rigorously proving that a massive swath of the city is trapped in a food desert with no reliable bus routes. I spend weeks detailing an elegant, data-backed master plan to re-zone an industrial corridor into a highly connected residential hub. The architecture and logic are flawless. By the afternoon, the bureaucratic reality sets in. I present the master plan to the city council. A major developer who holds immense political sway systematically dismantles the proposal because it doesn't maximize commercial tax revenue. The environmental review gets stalled in court. By the evening town hall meeting, the neighborhood associations are screaming that affordable housing will destroy their property values. And so, the beautiful plan dies. You go home exhausted and deeply cynical. The hardest lesson is learning that cities are not built by logic; they are built by political compromise. A year later, you manage to pass a highly diluted, compromised version of the original plan. It's not perfect. It's barely adequate. But it puts a single bus stop where there wasn't one before. If you want pristine, uncompromised control, build a model train set. If you are willing to fight for decades for incremental, messy progress, build a city.",
+    estimatedDuration: Math.round(1688 / 13.5)
+  },
+  {
+    id: "vp30",
+    initials: "EV",
+    name: "Elena Vasquez",
+    role: "Content Creator",
+    yearsExp: 5,
+    field: "Media & Journalism",
+    fieldSlug: "media-journalism",
+    questionAsked: "What is the reality of turning content creation into a real career?",
+    voiceScript: "Staring blindly into a ring light at 9 AM, doing the fourth take of an aggressively enthusiastic hook complaining because the algorithm just decided my last major project was entirely irrelevant. The internet glorifies this job as ultimate freedom, just waking up late and filming fun videos. The absolute crushing reality is that you are chained to the most unforgiving, unpredictable boss in existence: algorithmic retention patterns. My morning is purely analytical. I am reviewing the audience retention graphs from a 20-minute video essay I spent two weeks researching and editing. I see exactly where the graph drops off—at the 4-minute mark, right when the subject got historically complicated. It is deeply humbling data that proves people's attention spans are evaporating. The rest of the day is a grueling, isolated production cycle. I write scripts, arrange complex lighting rigs in my tiny apartment, and talk to a plastic camera lens for four hours like a maniac. The psychological toll is bizarre. Your entire net worth and professional validation are directly tied to an arbitrary view count that refreshes every ten seconds. By late afternoon, I am sitting in Adobe Premiere, cutting out every single breath and pause, furiously matching background music to visual cuts just to maximize dopamine delivery. You realize very quickly that you aren't an artist anymore; you are an engagement engineer. At 11 PM, the video goes live. You sit there, completely burned out, terrified that if this video flops, you won't be able to secure the brand deal needed to pay rent next month. You only survive this gig if you possess an obsessive work ethic and complete detachment from your own digital ego.",
+    estimatedDuration: Math.round(1682 / 13.5)
+  }
+];

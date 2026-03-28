@@ -41,8 +41,8 @@ export default function ForMentorsPage() {
             <div className="w-16 h-16 rounded-full bg-bg3 flex items-center justify-center text-white mx-auto mb-6">
               <Briefcase size={24} />
             </div>
-            <h3 className="font-display font-bold text-xl text-white mb-3">Pay It Forward</h3>
-            <p className="font-body text-muted">You survived the gauntlet. Now tell the next generation exactly what you wish someone had told you.</p>
+            <h3 className="font-display font-bold text-xl text-white mb-3">Corporate Outreach</h3>
+            <p className="font-body text-muted">You survived the gauntlet. Now volunteer your time to tell the next generation exactly what you wish someone had told you.</p>
           </div>
         </div>
 
@@ -70,8 +70,8 @@ export default function ForMentorsPage() {
               For professionals with 3+ years of experience. Stop doing generalized career day speeches. Talk 1:1 with highly ambitious students who have already been algorithmically matched to your field.
             </p>
             <ul className="space-y-3 font-body text-white/90 mb-8">
-              <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-teal"></span> $15 per 15-minute verification session.</li>
-              <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-teal"></span> Option to donate earnings to scholarship fund.</li>
+              <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-teal"></span> Participate via structured corporate social impact.</li>
+              <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-teal"></span> Completely free volunteer mentorship for students.</li>
               <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-teal"></span> Manual LinkedIn verification required.</li>
             </ul>
           </div>

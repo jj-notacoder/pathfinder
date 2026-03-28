@@ -4,6 +4,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, X, CheckCircle2 } from 'lucide-react';
+import { getFieldIcon } from '@/lib/icons';
 
 interface MentorCardProps {
   mentor: any;
@@ -30,9 +31,12 @@ export function MentorCard({ mentor, type }: MentorCardProps) {
           <div className="font-display font-black text-sm text-white mb-1 uppercase tracking-widest">
             {type === 'nearP' ? mentor.university : mentor.company}
           </div>
-          <p className="font-body text-xs text-muted mb-3">
+          <div className="font-body text-xs text-muted mb-3 flex items-center gap-1.5 mt-0.5">
+            <span className={type === 'nearP' ? 'text-amber/70' : 'text-teal/70'}>
+              {getFieldIcon(mentor.field || (type === 'nearP' ? 'Education' : 'Technology'), 'w-3.5 h-3.5')}
+            </span>
             {type === 'nearP' ? `${mentor.major} • ${mentor.year}` : `${mentor.title} • ${mentor.exp}`}
-          </p>
+          </div>
           <p className="font-body text-sm text-white/90 mb-4 line-clamp-2 italic">"{mentor.bio}"</p>
           <div className="mt-auto pt-4 border-t border-border/50 flex items-center justify-between">
             <span className="font-body text-xs text-muted font-bold tracking-widest uppercase">{mentor.sessions} Sessions</span>

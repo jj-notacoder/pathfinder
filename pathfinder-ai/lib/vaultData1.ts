@@ -1,0 +1,122 @@
+export const VAULT_PROF_1_10 = [
+  {
+    id: "vp1",
+    initials: "AC",
+    name: "Alex Chen",
+    role: "Senior Software Engineer",
+    yearsExp: 8,
+    field: "Technology",
+    fieldSlug: "technology",
+    questionAsked: "What is the hardest part of writing code all day?",
+    voiceScript: "You're opening your laptop at 8:30 in the morning and immediately getting hit with three priority slack notifications about a deployment that failed at 2AM. You haven't even had your coffee yet. I jump right into Datadog, trying to find where the error spiked, staring down a wall of logs that look like absolute gibberish to most people. The first hour is intense triage. Figuring out if the database is locked, if an API limit was hit, or if some junior dev pushed untested code overnight. Once the fire is out, which takes about two hours of pure adrenaline and typing frantically into terminal windows, the actual work begins. The core of my job is surprisingly solitary. It's incredibly glamorous when you tell people you build the backbone of a major app, but the reality is sitting in total silence with noise-canceling headphones for four hours straight. You stare at a single file, tracing logic through fifteen different functions to figure out why a button occasionally doesn't submit. The mental gymnastics required is exhausting. It's like holding an entire thousand-piece puzzle in your head and trying to flip one piece without the rest crashing down. The absolute peak of my afternoon is usually fixing something deeply complicated, running the test suite, watching all those green checkmarks pass, and feeling a brief rush of invincibility. But there's a flip side. You carry the complexity home with you. I will literally be walking my dog at 7 PM and suddenly realize the edge-case flaw in a caching strategy I wrote that afternoon. The code never really leaves your brain. It demands a level of continuous mental focus that burns people out fast if they aren't careful. If you are 17, understand that coding isn't about typing fast; it's about building a massive tolerance for frustration and a stubborn refusal to let a machine beat you.",
+    estimatedDuration: Math.round(1883 / 13.5)
+  },
+  {
+    id: "vp2",
+    initials: "PP",
+    name: "Priya Patel",
+    role: "Frontend Developer",
+    yearsExp: 3,
+    field: "Technology",
+    fieldSlug: "technology",
+    questionAsked: "Is a bootcamp actually enough to get you hired?",
+    voiceScript: "Logging into our component library at 9 AM, wondering if the new design system update is going to break every single button on the client dashboard. A bootcamp teaches you the syntax, how to build a basic React app, and how to pass an entry-level technical interview. But let me paint you a picture of my first month after bootcamp. I pulled down a massive enterprise codebase with tens of thousands of files, completely undocumented, using four different state management libraries because five different teams worked on it over six years. I cried in the bathroom twice my first week. You realize quickly that you weren't taught how to read other people's terrible code, and that's literally 70% of the job. By midday, I am actively arguing with the design team across Slack. They gave me a Figma file with a beautiful, transparent, glowing navigation bar that looks incredible on a huge Mac screen. I have to explain to them that rendering those blurs on a cheap Android phone crushes the frame rate, and we have to compromise. Frontend development isn't just coloring in a wireframe. I spend hours optimizing render cycles, handling messy API responses, and fixing weird Safari browser bugs that shouldn't exist in this century. The high point of my day today was successfully implementing a drag-and-drop feature that feels buttery smooth on mobile. It took two days of deep focus, screaming at documentation, and refactoring to get right. By 5 PM my brain is buzzing. You clock out, but your eyes are strained and you're mentally drained from constant problem-solving. My honest advice: do the bootcamp, but prepare yourself to feel wildly incompetent for the first two years of your career, and learn to embrace the feeling of not knowing what you are doing.",
+    estimatedDuration: Math.round(1792 / 13.5)
+  },
+  {
+    id: "vp3",
+    initials: "MT",
+    name: "Marcus Tetteh",
+    role: "Biomedical Engineer",
+    yearsExp: 6,
+    field: "Engineering",
+    fieldSlug: "engineering",
+    questionAsked: "What does a biomedical engineer actually build day to day?",
+    voiceScript: "Standing in front of the 3D bioprinter at 7 AM, re-calibrating the nozzle offset for the fourth time because a micrometer of deviation ruins the entire tissue scaffold matrix. We aren't building entire synthetic humans in a day. Today, my entire focus is on the tensile strength of a microscopic polymer mesh designed to help heart tissue regenerate. I spend the first part of the day running stress tests. We stretch the polymer tiny amounts and record the exact point it snaps under simulated arterial pressure. The documentation required is suffocating. I spend three hours in the afternoon just typing up the methodology for regulatory compliance. Every single variable, the exact temperature of the room, the batch number of the polymer, the calibration date of the tensile tester—if the FDA rejects the paperwork, you lose six months of work instantly. It's tedious, highly bureaucratic, and often very dry. But around 3 PM, the lab director calls us in. The in-vivo trial results came back on a cardiovascular stent iteration I designed the locking mechanism for two years ago. The deployment failure rate dropped to near zero. Real patients are going to have this exact geometrical shape inside their chest, keeping them alive, because of the math I did in a windowless room. The scale of the impact hits you all at once. By the time I clean my station and leave the lab at 6, my brain is fried from the sheer volume of data analysis, but there is a profound quiet satisfaction. If you want fast iterations and quick payouts, build software. If you have the patience to fail meticulously for three years to permanently save a life, consider bioengineering.",
+    estimatedDuration: Math.round(1697 / 13.5)
+  },
+  {
+    id: "vp4",
+    initials: "AK",
+    name: "Aisha Khalil",
+    role: "Cybersecurity Analyst",
+    yearsExp: 8,
+    field: "Cybersecurity",
+    fieldSlug: "cybersecurity",
+    questionAsked: "What does a real cyberattack response look like from the inside?",
+    voiceScript: "The pager goes off at 3:15 AM. It is a terrifying sound. You have a massive spike in outbound traffic from a segmented database server that holds encrypted patient records. I leap out of bed, heart pounding, and throw open my laptop in the dark. The first 30 minutes are purely adrenaline-driven forensic triage. Is it a false positive? Is an intern running a massive backup script? Or are we being actively exfiltrated? I isolate the subnet, effectively killing the server's connection to the outside world, and instantly I have the CTO blowing up my phone demanding to know why a critical portal is down. This is the reality of incident response. You have a gun to your head holding the balance between massive financial loss from downtime versus massive catastrophic loss from a data breach. It turns out to be a compromised service account. Someone fell for a highly targeted spear-phishing email. By hour four, the sun is coming up, I'm swimming in empty coffee cups, and I'm forensically dissecting the attacker's payload to see exactly what they touched. It's a grueling game of high-stakes chess where you are largely playing defense in the dark. The glamorous hacker movies omit the part where I have to spend the entire afternoon drafting a 40-page post-mortem report explaining to executives exactly how this happened and why we need more budget. You end the day completely physically exhausted, hyper-vigilant, and paranoid about clicking literally anything. It is an arms race that never stops. If you can handle extreme, sharp spikes of panic followed by days of quiet, obsessive log parsing, the security world will never bore you.",
+    estimatedDuration: Math.round(1637 / 13.5)
+  },
+  {
+    id: "vp5",
+    initials: "SB",
+    name: "Sofia Brandt",
+    role: "Data Scientist",
+    yearsExp: 4,
+    field: "Data & AI",
+    fieldSlug: "data-ai",
+    questionAsked: "Is data science as exciting as everyone says it is?",
+    voiceScript: "Pulling a 400 gigabyte dataset from AWS and watching the Jupyter notebook crash for the third time before 10 AM. They sell you data science as this magical realm where you're constantly building advanced neural networks predicting the future. Listen, 80% of my job is data janitor work. The data you get from the client is a total disaster. Values are missing, formats are deeply corrupted, and entire columns of critical revenue figures are just typed in as raw text with commas and euro signs mixed together. My entire morning is spent writing dirty Python scripts using Pandas just to clean the garbage out of the dataset. It is tedious, deeply unsexy work. Around 1 PM, you finally have clean data, and you can start the cool part: feature engineering and building the predictive model. Today I'm using an XGBoost algorithm to predict customer churn risk. The model trains, and suddenly the accuracy comes back at 99%. You feel like a genius for about five seconds before you realize you accidentally included the answer inside the training data—which is called data leakage. You fix it, re-run it, and get a realistic 78%. The afternoon is the hardest part: translating math into business. I have to stand in front of the marketing VP and explain why the model made a specific decision, without using words like 'gradient descent' or 'hyperparameters'. If they don't understand it, they won't use it. You go home mentally fatigued from jumping between deep mathematical abstraction and basic corporate communication all day. Don't do this for the AI hype; do this because you genuinely deeply enjoy wrestling with chaotic, massive spreadsheets to find hidden truths.",
+    estimatedDuration: Math.round(1682 / 13.5)
+  },
+  {
+    id: "vp6",
+    initials: "JO",
+    name: "James Osei",
+    role: "UX Designer",
+    yearsExp: 7,
+    field: "Design",
+    fieldSlug: "design",
+    questionAsked: "What does a UX designer actually do when they are not designing?",
+    voiceScript: "Sitting in a windowless user testing room at 9 AM, watching a grown adult repeatedly tap the wrong side of the screen while completely ignoring the giant green button I designed. It crushes your ego instantly. UX design is not graphic design; it is applied human psychology. The morning is spent reviewing heatmaps and session recordings. I'm fighting a war against friction. We noticed a 15% drop-off on the checkout page, and my job is to figure out why. Is the input field confusing? Is the contrast too low? Once I form a hypothesis, I jump into Figma to rapidly prototype four different solutions. This is the fun part, moving pixels, setting up micro-interactions, making things feel responsive and tactile. But by 2 PM, I'm in a brutal alignment meeting with engineering and product management. I pitch my ideal solution. The backend lead tells me the API doesn't support fetching the user's location fast enough for that interaction. The product manager says we don't have the budget to rewrite the API. So my beautiful, seamless design gets stripped down to a basic dropdown menu. That is the reality. You are constantly negotiating. You are the defender of the user in a room full of people who care about development speed and profit margins. You leave the office mentally drained from the constant diplomacy, wondering if you are actually designing or just acting as a corporate mediator. If you want to paint pictures, be an illustrator. If you want to solve complex architectural logic puzzles using human empathy and are willing to compromise daily, then UX is exactly where you belong.",
+    estimatedDuration: Math.round(1641 / 13.5)
+  },
+  {
+    id: "vp7",
+    initials: "LR",
+    name: "Leila Rashid",
+    role: "Nurse Practitioner",
+    yearsExp: 9,
+    field: "Medicine",
+    fieldSlug: "medicine",
+    questionAsked: "What does 3am in an acute care ward actually feel like?",
+    voiceScript: "The fluorescent lights never change, but by 3 AM the silence on the acute medical ward gets heavy, punctuated only by the rhythmic beeping of cardiac monitors and the hum of forced air. I'm ten hours into a fourteen-hour night shift. You are operating in a state of chronic sleep deprivation that physically hurts your bones. The first part of the shift is heavily clinical: medication rounds, assessing unpredictable delirium in post-op patients, and constantly charting. The charting alone absorbs nearly half your shift because if it isn't documented perfectly, legally it didn't happen. Around midnight, the adrenaline dips and the real test of endurance begins. A patient's oxygen saturation drops rapidly. Suddenly you are running. You're calling the on-call resident, pushing IV furosemide to clear the lungs, organizing an emergency portable chest X-ray. For forty-five minutes, everything is raw, terrifying action. Then, the patient stabilizes, and the ward just goes quiet again. It's a bizarre psychological whiplash. By 4 AM, the most profound part of nursing happens. A patient who cannot sleep because they are terrified of their biopsy results hits the call bell. You aren't giving meds; you are sitting on the edge of the bed in the dim light, holding their hand, and just letting them cry. You are the only thing standing between them and total institutional isolation. At 7:30 AM, you hand over your patients to the day shift. I walk out into the bright morning sun, my feet throbbing, feeling entirely drained but deeply, undeniably grounded. Nursing will break you physically, but it will anchor you to raw human reality in a way no desk job ever could.",
+    estimatedDuration: Math.round(1652 / 13.5)
+  },
+  {
+    id: "vp8",
+    initials: "PM",
+    name: "Priya Mehta",
+    role: "Corporate Lawyer",
+    yearsExp: 11,
+    field: "Law",
+    fieldSlug: "law",
+    questionAsked: "Did your law degree prepare you for anything real?",
+    voiceScript: "Staring at line 412 of an 800-page commercial lease agreement, tracing exactly how an indemnity clause cross-references an environmental liability waiver. My coffee went cold three hours ago. Law school taught me constitutional theory and how to sound smart in a seminar; it taught me absolutely nothing about surviving a Tuesday in big law. A typical morning is dominated by aggressive email triage. I am managing the acquisition of a mid-size logistics company. The opposing counsel sends over a revised draft of the purchase agreement, and they've subtly changed the definition of 'material adverse effect.' If I miss that hidden change, my client could be forced to buy a bankrupt company six months from now. The pressure to be flawless is suffocating. By lunchtime, I'm on a tense conference call with twelve people, negotiating the exact placement of a comma in a non-compete clause. It sounds incredibly petty, but millions of dollars hinge on that comma. The work is deeply intellectual, basically a high-stakes puzzle of logic and language, but it is also isolating. You spend your afternoon secluded in your office, billing time in six-minute increments. Every phone call, every email drafted, gets logged. By 8 PM, the partners leave, but the associates stay to turn the documents for the morning. I am walking to my car at midnight, my eyes burning, thinking about indemnification caps. You don't do this for justice; you do this because you possess an obsessive attention to structural detail and you thrive on protecting massive architectural business moves. If you hate reading dense text in total silence, do not go to law school.",
+    estimatedDuration: Math.round(1637 / 13.5)
+  },
+  {
+    id: "vp9",
+    initials: "DO",
+    name: "Daniel Owusu",
+    role: "Investment Analyst",
+    yearsExp: 5,
+    field: "Finance",
+    fieldSlug: "finance",
+    questionAsked: "What is a day in finance actually like beyond the spreadsheets?",
+    voiceScript: "Hitting F9 to refresh a massive Excel model and listening to the fans on my laptop scream as it recalculates 40,000 cells of projected revenue. It is 7:30 AM. My Managing Director needs a complete valuation of a supply chain company by noon so he can decide whether we should acquire them for half a billion dollars. The morning is an absolute blur of digging through fragmented SEC filings, questioning the target company's wildly optimistic growth projections, and building a discounted cash flow model. The movies show finance as people yelling on trading floors; modern private equity is just extreme, intense quantitative analysis in an eerily quiet open-plan office. At 11:30, the grilling begins. I sit in a glass conference room and the partners systematically tear my model apart. Why did I assume a 3% terminal growth rate? Have I accounted for raw material inflation in southeast Asia? You have to defend your math with absolute conviction under extreme intellectual pressure. If you are wrong, you look like a fool. If you are right, nobody congratulates you; you just move to the next deal. The afternoon is spent drafting the investment memo—translating the complex math into a compelling narrative of why this company is a goldmine or a trap. You leave the office at 9 PM on a good day, grab an overpriced salad, and walk to the subway. You carry the stress constantly, but you also carry the profound realization that you actually understand how the global economy works. Do this if you love being brutally proven wrong just so you can finally uncover the absolute mathematical truth underlying a business.",
+    estimatedDuration: Math.round(1629 / 13.5)
+  },
+  {
+    id: "vp10",
+    initials: "YK",
+    name: "Yuna Kim",
+    role: "Game Designer",
+    yearsExp: 5,
+    field: "Gaming",
+    fieldSlug: "gaming",
+    questionAsked: "What happens to a game designer's creativity after year 5?",
+    voiceScript: "Arguing passionately over Google Meet at 10 AM about why lowering the jump height of the main character by two pixels will completely destroy the pacing of the boss fight. People assume as a game designer, I just imagine cool dragons and explosion sequences all day. The reality is that I am a system balancing mathematician. My morning is spent entirely inside a massive, unruly spreadsheet tuning the economy of a multiplayer shooter. If we give the player 5% more scrap metal per win, it completely breaks the micro-transaction economy and the studio loses millions. It is an immense amount of pressure disguised as toys. By midday, I load up the Unreal Engine build to test a new level block-out. It crashes. I wait 20 minutes for it to compile, load it again, and spend three hours running against the exact same grey wall to test if the collision detection feels satisfying. Game development is not playing games; it is breaking them systematically, thousands of times. The most soul-crushing part is the scoping meeting in the afternoon. I present an incredible mechanic involving time-manipulation. The lead programmer calculates the memory budget, shakes his head, and kills the feature instantly. You mourn it for a minute, and you move on. Game design is the art of extreme compromise. You compromise with the engine, frame rates, marketing demands, and budget. I go home exhausted, and I don't even want to look at a video game. But when the game finally launches, and you see a kid online screaming with joy at a sequence you meticulously designed for six months? The burnout vanishes briefly. Only do this if you love the grueling mechanical process of building a toy more than actually playing it.",
+    estimatedDuration: Math.round(1661 / 13.5)
+  }
+];

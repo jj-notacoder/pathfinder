@@ -23,14 +23,14 @@ export function Waveform({ isPlaying }: { isPlaying: boolean }) {
             initial={{ height: initialH }}
             animate={{ 
               height: isPlaying 
-                ? [initialH, Math.max(minH, maxH * (0.4 + Math.random() * 0.6)), initialH] 
+                ? [initialH, Math.max(minH, maxH * (0.4 + ((Math.sin(i * 1.1) + 1) / 2) * 0.6)), initialH] 
                 : initialH 
             }}
             transition={{
-              duration: 0.5 + Math.random() * 0.5,
+              duration: 0.5 + ((Math.cos(i * 1.5) + 1) / 2) * 0.5,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: Math.random() * 0.2
+              delay: ((Math.sin(i * 2.3) + 1) / 2) * 0.2
             }}
           />
         );
